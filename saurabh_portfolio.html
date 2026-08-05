@@ -1,1164 +1,2876 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Saurabh Kumar Patel — Mobile App & MERN Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --bg:#0a0a0f;
-  --bg2:#111118;
-  --bg3:#1a1a24;
-  --accent:#7c6fff;
-  --accent2:#ff6b6b;
-  --accent3:#00d9b4;
-  --text:#f0eeff;
-  --muted:#7a7a9a;
-  --border:rgba(124,111,255,0.18);
-  --card:rgba(255,255,255,0.04);
-  --nav-bg:rgba(10,10,15,0.85);
-  --font-head:'Syne',sans-serif;
-  --font-body:'DM Sans',sans-serif;
-  --font-mono:'DM Mono',monospace;
-}
-html[data-theme="light"]{
-  --bg:#fbfaf8;
-  --bg2:#ffffff;
-  --bg3:#f3f1ec;
-  --accent:#6a5dee;
-  --accent2:#e8534f;
-  --accent3:#00a884;
-  --text:#161620;
-  --muted:#6b6a78;
-  --border:rgba(106,93,238,0.18);
-  --card:rgba(106,93,238,0.05);
-  --nav-bg:rgba(251,250,248,0.85);
-}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden;transition:background 0.4s ease,color 0.4s ease;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saurabh Kumar Patel — Mobile App & MERN Stack Developer</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ─── CURSOR ─────────────────────────────────────── */
-*, *::before, *::after { cursor: none !important; }
-#cursor {
-  position: fixed; width: 12px; height: 12px;
-  background: var(--accent); border-radius: 50%;
-  pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform 0.1s, width 0.25s, height 0.25s, opacity 0.25s;
-}
-#cursor-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1.5px solid rgba(124,111,255,0.5); border-radius: 50%;
-  pointer-events: none; z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform 0.18s ease, width 0.25s, height 0.25s, opacity 0.25s;
-}
-body.cursor-hover #cursor { width: 20px; height: 20px; opacity: 0.6; }
-body.cursor-hover #cursor-ring { width: 52px; height: 52px; opacity: 0.3; }
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #1a1a24;
+      --accent: #7c6fff;
+      --accent2: #ff6b6b;
+      --accent3: #00d9b4;
+      --text: #f0eeff;
+      --muted: #7a7a9a;
+      --border: rgba(124, 111, 255, 0.18);
+      --card: rgba(255, 255, 255, 0.04);
+      --nav-bg: rgba(10, 10, 15, 0.85);
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
 
-/* ─── NAV ─────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.2rem 6%;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  background: var(--nav-bg);
-  border-bottom: 0.5px solid var(--border);
-  animation: slideDown 0.6s ease both;
-  transition: background 0.4s ease;
-}
-@keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: none; opacity: 1; } }
-.nav-logo {
-  font-family: var(--font-head); font-size: 1.3rem; font-weight: 800;
-  color: var(--text); text-decoration: none; letter-spacing: -0.03em;
-}
-.nav-logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  color: var(--muted); text-decoration: none; font-size: 0.875rem;
-  font-weight: 500; letter-spacing: 0.02em; transition: color 0.2s;
-  position: relative; padding-bottom: 2px;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -2px; left: 0; width: 0;
-  height: 1px; background: var(--accent); transition: width 0.25s;
-}
-.nav-links a:hover { color: var(--text); }
-.nav-links a:hover::after { width: 100%; }
-.nav-btn {
-  background: var(--accent); color: #fff; padding: 0.5rem 1.4rem;
-  border-radius: 6px; font-size: 0.85rem; font-weight: 600;
-  text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
-  font-family: var(--font-head); letter-spacing: 0.01em;
-}
-.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,111,255,0.4); }
-.theme-toggle {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 0.5px solid var(--border); background: var(--card);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; transition: border-color 0.2s, transform 0.2s;
-  margin-left: 0.5rem;
-}
-.theme-toggle:hover { border-color: var(--accent); transform: rotate(20deg); }
-.nav-right { display: flex; align-items: center; gap: 0.5rem; }
+    html[data-theme="light"] {
+      --bg: #fbfaf8;
+      --bg2: #ffffff;
+      --bg3: #f3f1ec;
+      --accent: #6a5dee;
+      --accent2: #e8534f;
+      --accent3: #00a884;
+      --text: #161620;
+      --muted: #4a4a5e;
+      --border: rgba(106, 93, 238, 0.18);
+      --card: rgba(106, 93, 238, 0.05);
+      --nav-bg: rgba(251, 250, 248, 0.85);
+    }
 
-/* ─── HERO ────────────────────────────────────────── */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  padding: 8rem 6% 4rem; position: relative; overflow: hidden;
-}
-.hero-bg { position: absolute; inset: 0; pointer-events: none; }
-.hero-orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(130px); opacity: 0.15;
-}
-.orb1 { width: 700px; height: 700px; background: var(--accent); top: -150px; left: -150px; animation: orbFloat 8s ease-in-out infinite; }
-.orb2 { width: 450px; height: 450px; background: var(--accent2); bottom: -50px; right: 5%; animation: orbFloat 10s ease-in-out infinite reverse; }
-.orb3 { width: 350px; height: 350px; background: var(--accent3); top: 30%; right: 28%; animation: orbFloat 12s ease-in-out infinite 2s; }
-@keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(20px,-20px) scale(1.05); } 66% { transform: translate(-15px,15px) scale(0.97); } }
-.grid-lines {
-  position: absolute; inset: 0;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px; opacity: 0.4;
-}
-.hero-content { position: relative; z-index: 1; max-width: 600px; order: 1; flex: 1; }
-.hero-flex { display: flex; align-items: center; justify-content: space-between; gap: 3.5rem; position: relative; z-index: 1; width: 100%; }
-.profile-pic-wrap {
-  flex-shrink: 0; position: relative; order: 2;
-  animation: fadeUp 0.7s 0.2s both;
-}
-.profile-pic {
-  width: 340px; height: 340px; border-radius: 28px;
-  background: var(--bg2); border: 0.5px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-}
-.profile-pic img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.profile-pic.has-img img { display: block; }
-.profile-pic.has-img .profile-placeholder-content { display: none; }
-.profile-placeholder-content {
-  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-  color: var(--muted); text-align: center; padding: 1rem;
-}
-.profile-placeholder-content i { font-size: 2.2rem; opacity: 0.5; }
-.profile-placeholder-content span { font-size: 0.72rem; font-family: var(--font-mono); letter-spacing: 0.03em; line-height: 1.5; }
-.profile-pic-ring {
-  position: absolute; inset: -14px; border-radius: 36px;
-  border: 1.5px dashed rgba(124,111,255,0.3);
-  animation: spin 30s linear infinite;
-}
-@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-@media (max-width: 1100px) {
-  .profile-pic { width: 280px; height: 280px; }
-}
-@media (max-width: 900px) {
-  .hero-flex { flex-direction: column-reverse; gap: 2rem; text-align: left; }
-  .profile-pic-wrap { order: 0; align-self: center; }
-  .hero-content { order: 1; max-width: 100%; }
-  .profile-pic { width: 220px; height: 220px; }
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  background: rgba(124,111,255,0.1); border: 0.5px solid rgba(124,111,255,0.3);
-  border-radius: 100px; padding: 0.35rem 1.1rem;
-  font-size: 0.78rem; font-family: var(--font-mono); color: var(--accent);
-  margin-bottom: 2rem; letter-spacing: 0.05em;
-  animation: fadeUp 0.7s 0.2s both;
-}
-.badge-dot { width: 7px; height: 7px; background: var(--accent3); border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,217,180,0.5); } 50% { opacity: 0.4; box-shadow: 0 0 0 5px rgba(0,217,180,0); } }
-.hero h1 {
-  font-family: var(--font-head); font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 800; line-height: 1.03; letter-spacing: -0.035em;
-  margin-bottom: 1.5rem; animation: fadeUp 0.7s 0.35s both;
-}
-.hero h1 .name { display: block; }
-.hero h1 .role { display: block; color: var(--accent); }
-.hero h1 .type { display: block; color: var(--muted); font-weight: 600; }
-.hero-desc {
-  font-size: 1.05rem; color: var(--muted); max-width: 540px;
-  margin-bottom: 2.5rem; line-height: 1.8;
-  animation: fadeUp 0.7s 0.5s both;
-}
-.hero-desc strong { color: var(--text); font-weight: 500; }
-.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.7s 0.65s both; }
-.btn-primary {
-  background: var(--accent); color: #fff; padding: 0.75rem 2rem;
-  border-radius: 8px; text-decoration: none; font-weight: 700;
-  font-family: var(--font-head); font-size: 0.9rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(124,111,255,0.4); }
-.btn-secondary {
-  background: transparent; color: var(--text); padding: 0.75rem 2rem;
-  border-radius: 8px; text-decoration: none; font-weight: 500;
-  font-family: var(--font-head); font-size: 0.9rem;
-  border: 0.5px solid var(--border); transition: border-color 0.2s, color 0.2s;
-}
-.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-.hero-stats {
-  display: flex; gap: 3.5rem; margin-top: 4rem; padding-top: 2.5rem;
-  border-top: 0.5px solid var(--border);
-  animation: fadeUp 0.7s 0.8s both;
-}
-.stat-val {
-  font-family: var(--font-head); font-size: 2.2rem; font-weight: 800;
-  background: linear-gradient(135deg, var(--text), var(--accent));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-.stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.07em; text-transform: uppercase; margin-top: 0.15rem; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* scroll indicator */
-.scroll-indicator {
-  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  font-size: 0.7rem; font-family: var(--font-mono); color: var(--muted);
-  letter-spacing: 0.1em; text-transform: uppercase;
-  animation: bounce 2s ease-in-out infinite;
-}
-.scroll-line { width: 1px; height: 50px; background: linear-gradient(var(--accent), transparent); }
-@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
 
-/* ─── SECTIONS ────────────────────────────────────── */
-section { padding: 7rem 6%; }
-.section-inner { max-width: 1100px; margin: 0 auto; }
-.section-header { margin-bottom: 3.5rem; }
-.section-tag {
-  font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent3);
-  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem;
-}
-.section-title {
-  font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.8rem;
-}
-.section-sub { color: var(--muted); font-size: 0.95rem; max-width: 480px; line-height: 1.75; }
+    /* ─── FOCUS ───────────────────────────────────────── */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
 
-/* ─── ABOUT STRIP ─────────────────────────────────── */
-.about-strip {
-  background: var(--bg2); padding: 3rem 6%;
-  border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border);
-}
-.about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.about-text { font-size: 1.05rem; color: var(--muted); line-height: 1.85; }
-.about-text strong { color: var(--text); font-weight: 500; }
-.about-highlights { display: flex; flex-direction: column; gap: 0.75rem; }
-.highlight-item {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 0.75rem 1rem; border-radius: 8px;
-  border: 0.5px solid var(--border); background: var(--card);
-  transition: border-color 0.2s;
-}
-.highlight-item:hover { border-color: var(--accent); }
-.highlight-icon { font-size: 1.1rem; min-width: 28px; text-align: center; }
-.highlight-text { font-size: 0.88rem; color: var(--muted); }
-.highlight-text strong { color: var(--text); font-weight: 500; }
+    /* ─── CURSOR ─────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      cursor: none !important;
+    }
 
-/* ─── SKILLS ──────────────────────────────────────── */
-.skills-section { background: var(--bg); }
-.skills-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 1.2rem;
-}
-.skill-card {
-  background: var(--bg2); border: 0.5px solid var(--border);
-  border-radius: 14px; padding: 1.5rem 1.7rem;
-  transition: border-color 0.25s, transform 0.25s;
-  position: relative; overflow: hidden;
-}
-.skill-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  transform: scaleX(0); transition: transform 0.35s;
-}
-.skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-.skill-card:hover::before { transform: scaleX(1); }
-.skill-card-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.1rem; }
-.skill-icon {
-  width: 38px; height: 38px; border-radius: 9px;
-  display: flex; align-items: center; justify-content: center; font-size: 1rem;
-}
-.si-purple { background: rgba(124,111,255,0.15); }
-.si-coral  { background: rgba(255,107,107,0.15); }
-.si-teal   { background: rgba(0,217,180,0.15); }
-.si-amber  { background: rgba(255,178,0,0.15); }
-.si-blue   { background: rgba(55,138,221,0.15); }
-.si-green  { background: rgba(99,153,34,0.15); }
-.skill-cat { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.tag {
-  background: var(--card); border: 0.5px solid var(--border);
-  border-radius: 4px; padding: 0.22rem 0.65rem;
-  font-size: 0.73rem; font-family: var(--font-mono); color: var(--muted);
-  transition: color 0.2s, border-color 0.2s;
-}
-.tag:hover { color: var(--text); border-color: var(--accent); }
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.25s, height 0.25s, opacity 0.25s;
+    }
 
-/* ─── EXPERIENCE ──────────────────────────────────── */
-.exp-section { background: var(--bg2); }
-.exp-timeline { padding-left: 2rem; border-left: 1px solid var(--border); position: relative; }
-.exp-item { margin-bottom: 3.5rem; position: relative; }
-.exp-item:last-child { margin-bottom: 0; }
-.exp-dot {
-  position: absolute; left: -2.55rem; top: 0.45rem;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--accent); border: 2.5px solid var(--bg2);
-  box-shadow: 0 0 0 3px rgba(124,111,255,0.2);
-  transition: box-shadow 0.3s;
-}
-.exp-item:hover .exp-dot { box-shadow: 0 0 0 6px rgba(124,111,255,0.15); }
-.exp-meta { margin-bottom: 0.5rem; }
-.exp-period { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent3); letter-spacing: 0.07em; margin-bottom: 0.25rem; }
-.exp-company { font-family: var(--font-head); font-size: 1.25rem; font-weight: 800; margin-bottom: 0.1rem; }
-.exp-role-line { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-.exp-role { font-size: 0.88rem; color: var(--accent); font-weight: 500; }
-.exp-loc { font-size: 0.8rem; color: var(--muted); font-family: var(--font-mono); }
-.exp-bullets { list-style: none; margin-top: 0.85rem; display: flex; flex-direction: column; gap: 0.3rem; }
-.exp-bullets li {
-  font-size: 0.9rem; color: var(--muted); padding-left: 1.1rem;
-  position: relative; line-height: 1.65;
-}
-.exp-bullets li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-weight: 600; }
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(124, 111, 255, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.25s, height 0.25s, opacity 0.25s;
+    }
 
-/* ─── PROJECTS ────────────────────────────────────── */
-.projects-section { background: var(--bg); }
-.projects-header-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
-.view-all-btn {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: transparent; color: var(--text);
-  border: 0.5px solid var(--border); border-radius: 8px;
-  padding: 0.65rem 1.4rem; font-family: var(--font-head);
-  font-size: 0.85rem; font-weight: 700; white-space: nowrap;
-  transition: border-color 0.2s, background 0.2s, transform 0.2s;
-}
-.view-all-btn:hover { border-color: var(--accent); background: rgba(124,111,255,0.06); transform: translateY(-2px); }
-.view-all-btn i { font-style: normal; transition: transform 0.2s; }
-.view-all-btn:hover i { transform: translateX(3px); }
-.projects-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-.proj-card {
-  background: var(--bg2); border: 0.5px solid var(--border);
-  border-radius: 16px; padding: 0; display: flex;
-  flex-direction: column; gap: 0;
-  transition: border-color 0.28s, transform 0.28s, box-shadow 0.28s;
-  position: relative; overflow: hidden;
-}
-.proj-banner {
-  width: 100%; aspect-ratio: 16/9; background: var(--bg3);
-  border-bottom: 0.5px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden; position: relative;
-}
-.proj-banner img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.proj-banner.has-img img { display: block; }
-.proj-banner.has-img .proj-banner-placeholder { display: none; }
-.proj-banner-placeholder {
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  color: var(--muted); text-align: center; padding: 1rem;
-}
-.proj-banner-placeholder i { font-size: 1.8rem; opacity: 0.45; }
-.proj-banner-placeholder span { font-size: 0.68rem; font-family: var(--font-mono); letter-spacing: 0.03em; }
-.proj-body { padding: 1.6rem 1.7rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
-.proj-links { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-.proj-link {
-  display: flex; align-items: center; gap: 0.4rem;
-  font-size: 0.74rem; font-family: var(--font-mono);
-  color: var(--accent); text-decoration: none;
-  padding: 0.35rem 0.75rem; border-radius: 6px;
-  border: 0.5px solid rgba(124,111,255,0.25); background: rgba(124,111,255,0.06);
-  transition: border-color 0.2s, background 0.2s;
-}
-.proj-link:hover { border-color: var(--accent); background: rgba(124,111,255,0.12); }
-.proj-link.disabled { opacity: 0.35; pointer-events: none; }
+    body.cursor-hover #cursor {
+      width: 20px;
+      height: 20px;
+      opacity: 0.6;
+    }
 
-/* ─── ALL PROJECTS OVERLAY ────────────────────────── */
-.all-projects-overlay {
-  position: fixed; inset: 0; z-index: 500;
-  background: var(--bg); overflow-y: auto;
-  transform: translateY(100%); opacity: 0;
-  transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), opacity 0.4s ease;
-  visibility: hidden;
-}
-.all-projects-overlay.open { transform: translateY(0); opacity: 1; visibility: visible; }
-.ap-header {
-  position: sticky; top: 0; z-index: 5;
-  background: var(--nav-bg); backdrop-filter: blur(20px);
-  border-bottom: 0.5px solid var(--border);
-  padding: 1.6rem 6% 1.2rem;
-  transition: background 0.4s ease;
-}
-.ap-header-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; max-width: 1100px; margin: 0 auto 1.4rem; }
-.ap-title { font-family: var(--font-head); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; }
-.ap-close {
-  width: 42px; height: 42px; border-radius: 50%;
-  border: 0.5px solid var(--border); background: var(--card);
-  color: var(--text); font-size: 1.1rem;
-  display: flex; align-items: center; justify-content: center;
-  transition: border-color 0.2s, transform 0.2s, background 0.2s;
-}
-.ap-close:hover { border-color: var(--accent2); background: rgba(255,107,107,0.1); transform: rotate(90deg); }
-.ap-filters { display: flex; gap: 0.6rem; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
-.ap-filter {
-  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.03em;
-  color: var(--muted); background: transparent;
-  border: 0.5px solid var(--border); border-radius: 100px;
-  padding: 0.45rem 1.1rem; transition: all 0.2s;
-}
-.ap-filter:hover { color: var(--text); border-color: var(--accent); }
-.ap-filter.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.ap-body { padding: 2.5rem 6% 5rem; max-width: 1100px; margin: 0 auto; }
-.ap-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-.ap-empty { text-align: center; color: var(--muted); padding: 4rem 0; font-family: var(--font-mono); font-size: 0.9rem; display: none; }
-.ap-empty.show { display: block; }
-.ap-card-hidden { display: none !important; }
-.proj-cat-badges { display: flex; gap: 0.4rem; position: absolute; top: 0.8rem; left: 0.8rem; z-index: 2; }
-.proj-cat-badge {
-  font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.04em;
-  padding: 0.2rem 0.55rem; border-radius: 5px;
-  background: rgba(10,10,15,0.65); color: #fff; backdrop-filter: blur(6px);
-  text-transform: uppercase;
-}
-body.ap-locked { overflow: hidden; }
-.proj-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(circle at 80% 10%, rgba(124,111,255,0.06) 0%, transparent 65%);
-  opacity: 0; transition: opacity 0.3s;
-}
-.proj-card:hover { border-color: rgba(124,111,255,0.45); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-.proj-card:hover::after { opacity: 1; }
-.proj-header { display: flex; align-items: flex-start; justify-content: space-between; }
-.proj-num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; }
-.proj-date { font-family: var(--font-mono); font-size: 0.68rem; color: var(--muted); }
-.proj-name { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; color: var(--text); }
-.proj-type { font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); margin-top: 0.1rem; }
-.proj-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.7; flex: 1; }
-.proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.proj-tag {
-  background: rgba(124,111,255,0.08); border: 0.5px solid rgba(124,111,255,0.2);
-  border-radius: 4px; padding: 0.2rem 0.6rem;
-  font-size: 0.7rem; font-family: var(--font-mono); color: rgba(124,111,255,0.85);
-}
-.proj-divider { height: 0.5px; background: var(--border); }
+    body.cursor-hover #cursor-ring {
+      width: 52px;
+      height: 52px;
+      opacity: 0.3;
+    }
 
-/* ─── CONTACT ─────────────────────────────────────── */
-.contact-section { background: var(--bg2); }
-.contact-layout { display: flex; flex-direction: column; align-items: flex-start; gap: 2rem; max-width: 640px; }
-.contact-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.8; }
-.contact-intro strong { color: var(--text); font-weight: 500; }
-.contact-links { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
-.contact-link {
-  display: flex; align-items: center; gap: 0.85rem;
-  color: var(--muted); text-decoration: none; font-size: 0.92rem;
-  padding: 0.9rem 1.2rem; border: 0.5px solid var(--border);
-  border-radius: 10px; transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
-  background: var(--card);
-}
-.contact-link:hover { color: var(--text); border-color: var(--accent); background: rgba(124,111,255,0.06); transform: translateX(4px); }
-.cl-icon { font-size: 1.05rem; min-width: 24px; text-align: center; }
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 6%;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: var(--nav-bg);
+      border-bottom: 0.5px solid var(--border);
+      animation: slideDown 0.6s ease both;
+      transition: background 0.4s ease;
+    }
 
-/* ─── FOOTER ──────────────────────────────────────── */
-footer {
-  padding: 2rem 6%; border-top: 0.5px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem; background: var(--bg);
-}
-.footer-copy { font-size: 0.78rem; color: var(--muted); font-family: var(--font-mono); }
-.footer-links { display: flex; gap: 1.8rem; }
-.footer-links a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--text); }
-.back-to-top {
-  font-size: 0.78rem; color: var(--accent); font-family: var(--font-mono);
-  text-decoration: none; letter-spacing: 0.05em; transition: opacity 0.2s;
-}
-.back-to-top:hover { opacity: 0.7; }
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
 
-/* ─── ANIMATIONS ──────────────────────────────────── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
-.reveal.visible { opacity: 1; transform: none; }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
+      to {
+        transform: none;
+        opacity: 1;
+      }
+    }
 
-/* ─── RESPONSIVE ──────────────────────────────────── */
-@media (max-width: 768px) {
-  nav { padding: 1rem 4%; }
-  .nav-links { display: none; }
-  .hero { padding: 7rem 4% 4rem; }
-  .hero-stats { gap: 2rem; flex-wrap: wrap; }
-  section { padding: 5rem 4%; }
-  .about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-  footer { flex-direction: column; align-items: flex-start; }
-  #cursor, #cursor-ring { display: none; }
-}
-</style>
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+      cursor: pointer;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.5rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      font-family: var(--font-head);
+      letter-spacing: 0.01em;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(124, 111, 255, 0.4);
+    }
+
+    .theme-toggle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0.5px solid var(--border);
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, transform 0.2s;
+      margin-left: 0.5rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      transform: rotate(20deg);
+      color: var(--text);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-hamburger {
+      display: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--card);
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-hamburger:hover {
+      border-color: var(--accent);
+    }
+
+    /* ─── MOBILE NAV ──────────────────────────────────── */
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      padding: 6rem 6% 3rem;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      visibility: hidden;
+    }
+
+    .mobile-nav.open {
+      transform: none;
+      visibility: visible;
+    }
+
+    .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+    }
+
+    .mobile-nav-links li {
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .mobile-nav-links a {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      padding: 0.8rem 0;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--text);
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 6%;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 0.5px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .mobile-nav-close:hover {
+      border-color: var(--accent2);
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      cursor: pointer;
+    }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 6% 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.15;
+    }
+
+    .orb1 {
+      width: 700px;
+      height: 700px;
+      background: var(--accent);
+      top: -150px;
+      left: -150px;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    .orb2 {
+      width: 450px;
+      height: 450px;
+      background: var(--accent2);
+      bottom: -50px;
+      right: 5%;
+      animation: orbFloat 10s ease-in-out infinite reverse;
+    }
+
+    .orb3 {
+      width: 350px;
+      height: 350px;
+      background: var(--accent3);
+      top: 30%;
+      right: 28%;
+      animation: orbFloat 12s ease-in-out infinite 2s;
+    }
+
+    @keyframes orbFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(20px, -20px) scale(1.05);
+      }
+
+      66% {
+        transform: translate(-15px, 15px) scale(0.97);
+      }
+    }
+
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.4;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      order: 1;
+      flex: 1;
+    }
+
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3.5rem;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .profile-pic-wrap {
+      flex-shrink: 0;
+      position: relative;
+      order: 2;
+      animation: fadeUp 0.7s 0.2s both;
+    }
+
+    .profile-pic {
+      width: 340px;
+      height: 340px;
+      border-radius: 28px;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .profile-pic.has-img img {
+      display: block;
+    }
+
+    .profile-pic.has-img .profile-placeholder-content {
+      display: none;
+    }
+
+    .profile-placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .profile-placeholder-content svg {
+      opacity: 0.5;
+    }
+
+    .profile-placeholder-content span {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+
+    .profile-pic-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 36px;
+      border: 1.5px dashed rgba(124, 111, 255, 0.3);
+      animation: spin 30s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .profile-pic {
+        width: 280px;
+        height: 280px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero-flex {
+        flex-direction: column-reverse;
+        gap: 2rem;
+        text-align: left;
+      }
+
+      .profile-pic-wrap {
+        order: 0;
+        align-self: center;
+      }
+
+      .hero-content {
+        order: 1;
+        max-width: 100%;
+      }
+
+      .profile-pic {
+        width: 220px;
+        height: 220px;
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(124, 111, 255, 0.1);
+      border: 0.5px solid rgba(124, 111, 255, 0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1.1rem;
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      animation: fadeUp 0.7s 0.2s both;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(0, 217, 180, 0.5);
+      }
+
+      50% {
+        opacity: 0.4;
+        box-shadow: 0 0 0 5px rgba(0, 217, 180, 0);
+      }
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.03;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s 0.35s both;
+    }
+
+    .hero h1 .name {
+      display: block;
+    }
+
+    .hero h1 .role {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero h1 .type {
+      display: block;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+      animation: fadeUp 0.7s 0.5s both;
+    }
+
+    .hero-desc strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.65s both;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(124, 111, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      border: 0.5px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3.5rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 0.5px solid var(--border);
+      animation: fadeUp 0.7s 0.8s both;
+    }
+
+    .stat-val {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--text), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-top: 0.15rem;
+    }
+
+    /* scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(var(--accent), transparent);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* ─── SECTIONS ────────────────────────────────────── */
+    section {
+      padding: 7rem 6%;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 480px;
+      line-height: 1.75;
+    }
+
+    /* ─── ABOUT STRIP ─────────────────────────────────── */
+    .about-strip {
+      background: var(--bg2);
+      padding: 3rem 6%;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .about-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 0.5px solid var(--border);
+      background: var(--card);
+      transition: border-color 0.2s;
+      cursor: default;
+    }
+
+    .highlight-item:hover {
+      border-color: var(--accent);
+    }
+
+    .highlight-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      color: var(--accent);
+    }
+
+    .highlight-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .highlight-text strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── SKILLS ──────────────────────────────────────── */
+    .skills-section {
+      background: var(--bg);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1.7rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transition: transform 0.35s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .skill-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .skill-card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .skill-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .si-purple {
+      background: rgba(124, 111, 255, 0.15);
+      color: var(--accent);
+    }
+
+    .si-coral {
+      background: rgba(255, 107, 107, 0.15);
+      color: var(--accent2);
+    }
+
+    .si-teal {
+      background: rgba(0, 217, 180, 0.15);
+      color: var(--accent3);
+    }
+
+    .si-amber {
+      background: rgba(255, 178, 0, 0.15);
+      color: #ffb200;
+    }
+
+    .si-blue {
+      background: rgba(55, 138, 221, 0.15);
+      color: #378add;
+    }
+
+    .si-green {
+      background: rgba(99, 153, 34, 0.15);
+      color: #639922;
+    }
+
+    .skill-cat {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      padding: 0.22rem 0.65rem;
+      font-size: 0.73rem;
+      font-family: var(--font-mono);
+      color: var(--muted);
+      transition: color 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+
+    .tag:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* ─── EXPERIENCE ──────────────────────────────────── */
+    .exp-section {
+      background: var(--bg2);
+    }
+
+    .exp-timeline {
+      padding-left: 2rem;
+      border-left: 1px solid var(--border);
+      position: relative;
+    }
+
+    .exp-item {
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .exp-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .exp-dot {
+      position: absolute;
+      left: -2.55rem;
+      top: 0.45rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2.5px solid var(--bg2);
+      box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.2);
+      transition: box-shadow 0.3s;
+    }
+
+    .exp-item:hover .exp-dot {
+      box-shadow: 0 0 0 6px rgba(124, 111, 255, 0.15);
+    }
+
+    .exp-meta {
+      margin-bottom: 0.5rem;
+    }
+
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--accent3);
+      letter-spacing: 0.07em;
+      margin-bottom: 0.25rem;
+    }
+
+    .exp-company {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.1rem;
+    }
+
+    .exp-role-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .exp-role {
+      font-size: 0.88rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .exp-loc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .exp-bullets {
+      list-style: none;
+      margin-top: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    .exp-bullets li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── PROJECTS ────────────────────────────────────── */
+    .projects-section {
+      background: var(--bg);
+    }
+
+    .projects-header-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .view-all-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      border: 0.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.65rem 1.4rem;
+      font-family: var(--font-head);
+      font-size: 0.85rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .view-all-btn:hover {
+      border-color: var(--accent);
+      background: rgba(124, 111, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .view-all-btn svg {
+      transition: transform 0.2s;
+    }
+
+    .view-all-btn:hover svg {
+      transform: translateX(3px);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .proj-card {
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      border-radius: 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: border-color 0.28s, transform 0.28s, box-shadow 0.28s;
+      position: relative;
+      overflow: hidden;
+      cursor: default !important;
+    }
+
+    .proj-banner {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--bg3);
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .proj-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .proj-banner.has-img img {
+      display: block;
+    }
+
+    .proj-banner.has-img .proj-banner-placeholder {
+      display: none;
+    }
+
+    .proj-banner-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .proj-banner-placeholder svg {
+      opacity: 0.45;
+    }
+
+    .proj-banner-placeholder span {
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.03em;
+    }
+
+    .proj-body {
+      padding: 1.6rem 1.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .proj-links {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .proj-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.74rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      border: 0.5px solid rgba(124, 111, 255, 0.25);
+      background: rgba(124, 111, 255, 0.06);
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .proj-link:hover {
+      border-color: var(--accent);
+      background: rgba(124, 111, 255, 0.12);
+    }
+
+    .proj-link.disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    /* ─── ALL PROJECTS OVERLAY ────────────────────────── */
+    .all-projects-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: var(--bg);
+      overflow-y: auto;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+      visibility: hidden;
+    }
+
+    .all-projects-overlay.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .ap-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 1.6rem 6% 1.2rem;
+      transition: background 0.4s ease;
+    }
+
+    .ap-header-inner {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto 1.4rem;
+    }
+
+    .ap-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .ap-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 0.5px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .ap-close:hover {
+      border-color: var(--accent2);
+      background: rgba(255, 107, 107, 0.1);
+      transform: rotate(90deg);
+    }
+
+    .ap-filters {
+      display: flex;
+      gap: 0.6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .ap-filter {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      background: transparent;
+      border: 0.5px solid var(--border);
+      border-radius: 100px;
+      padding: 0.45rem 1.1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .ap-filter:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .ap-filter.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .ap-body {
+      padding: 2.5rem 6% 5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .ap-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .ap-empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 4rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .ap-empty.show {
+      display: block;
+    }
+
+    .ap-card-hidden {
+      display: none !important;
+    }
+
+    .proj-cat-badges {
+      display: flex;
+      gap: 0.4rem;
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 2;
+    }
+
+    .proj-cat-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 5px;
+      background: rgba(10, 10, 15, 0.65);
+      color: #fff;
+      backdrop-filter: blur(6px);
+      text-transform: uppercase;
+    }
+
+    body.ap-locked {
+      overflow: hidden;
+    }
+
+    .proj-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 10%, rgba(124, 111, 255, 0.06) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .proj-card:hover {
+      border-color: rgba(124, 111, 255, 0.45);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .proj-card:hover::after {
+      opacity: 1;
+    }
+
+    .proj-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .proj-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .proj-date {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--muted);
+    }
+
+    .proj-name {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .proj-type {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      margin-top: 0.1rem;
+    }
+
+    .proj-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .proj-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .proj-tag {
+      background: rgba(124, 111, 255, 0.08);
+      border: 0.5px solid rgba(124, 111, 255, 0.2);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: rgba(124, 111, 255, 0.85);
+    }
+
+    .proj-divider {
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    .contact-section {
+      background: var(--bg2);
+    }
+
+    .contact-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 640px;
+    }
+
+    .contact-intro {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-intro strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      padding: 0.9rem 1.2rem;
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .contact-link:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      background: rgba(124, 111, 255, 0.06);
+      transform: translateX(4px);
+    }
+
+    .cl-icon {
+      display: flex;
+      align-items: center;
+      min-width: 24px;
+      color: var(--accent);
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      padding: 2rem 6%;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--bg);
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    .back-to-top {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-family: var(--font-mono);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+
+    .back-to-top:hover {
+      opacity: 0.7;
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* ─── REDUCED MOTION ──────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 4%;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .hero {
+        padding: 7rem 4% 4rem;
+      }
+
+      .hero-stats {
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+
+      section {
+        padding: 5rem 4%;
+      }
+
+      .about-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- Custom cursor -->
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+  <!-- Custom cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
 
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="#home">SP<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a class="nav-btn" href="#contact">Hire Me →</a>
-  <div class="nav-right">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Navigation menu">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <ul class="mobile-nav-links">
+      <li><a href="#about" id="mobileAbout">About</a></li>
+      <li><a href="#skills" id="mobileSkills">Skills</a></li>
+      <li><a href="#experience" id="mobileExp">Experience</a></li>
+      <li><a href="#projects" id="mobileProjects">Projects</a></li>
+      <li><a href="#contact" id="mobileContact">Contact</a></li>
+    </ul>
+    <a class="mobile-nav-cta" href="#contact" id="mobileCta">Hire Me</a>
   </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg">
-    <div class="grid-lines"></div>
-    <div class="hero-orb orb1"></div>
-    <div class="hero-orb orb2"></div>
-    <div class="hero-orb orb3"></div>
-  </div>
-  <div class="hero-flex">
-  <div class="profile-pic-wrap">
-    <div class="profile-pic-ring"></div>
-    <div class="profile-pic has-img" id="profilePic">
-      <!--
-        TO ADD YOUR PHOTO:
-        Replace the line below with:
-        <img src="your-photo.jpg" alt="Saurabh Kumar Patel" />
-        Then add class="has-img" to the div with id="profilePic" above.
-      -->
-        <img src="profile_2.png" alt="Saurabh Kumar Patel" />
-
-      <!-- <div class="profile-placeholder-content">
-        <i>👤</i>
-        <span>Add your<br/>photo here</span>
-      </div> -->
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#home">SP<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-btn" href="#contact">Hire Me →</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <span id="iconMoon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </span>
+        <span id="iconSun" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+        </span>
+      </button>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open navigation menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
     </div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Currently available for work
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-lines"></div>
+      <div class="hero-orb orb1"></div>
+      <div class="hero-orb orb2"></div>
+      <div class="hero-orb orb3"></div>
     </div>
-    <h1>
-      <span class="name">Saurabh</span>
-      <span class="role">Kumar Patel</span>
-      <span class="type">App &amp; MERN Dev.</span>
-    </h1>
-    <p class="hero-desc">
-      <strong>3+ years</strong> building scalable mobile and web apps.
-      Specializing in <strong>React Native</strong>, Node.js, WebRTC, and real-time systems —
-      from concept to production-ready software.
-    </p>
-    <div class="hero-ctas">
-      <a class="btn-primary" href="#projects">View Projects</a>
-      <a class="btn-secondary" href="#contact">Get in Touch</a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-val">3+</div>
-        <div class="stat-label">Years Exp.</div>
-      </div>
-      <div>
-        <div class="stat-val">6+</div>
-        <div class="stat-label">Key Projects</div>
-      </div>
-      <div>
-        <div class="stat-val">4</div>
-        <div class="stat-label">Companies</div>
-      </div>
-      <div>
-        <div class="stat-val">∞</div>
-        <div class="stat-label">Coffee ☕</div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    scroll
-  </div>
-</section>
-
-<!-- ABOUT STRIP -->
-<div class="about-strip" id="about">
-  <div class="about-inner">
-    <div class="reveal">
-      <div class="section-tag" style="margin-bottom:0.8rem;">Who I am</div>
-      <p class="about-text">
-        I'm a <strong>Results-driven Mobile App and MERN Stack Developer</strong> based in Rewa, Madhya Pradesh. I build end-to-end solutions — from real-time chat and video calling apps to OTT streaming platforms and ERP systems. Passionate about <strong>intuitive user experiences</strong> and delivering high-quality, production-ready software.
-      </p>
-    </div>
-    <div class="about-highlights reveal reveal-delay-1">
-      <div class="highlight-item">
-        <span class="highlight-icon">📍</span>
-        <span class="highlight-text"><strong>Location:</strong> Rewa, Madhya Pradesh — open to remote &amp; relocation</span>
-      </div>
-      <!-- <div class="highlight-item">
-        <span class="highlight-icon">🎓</span>
-        <span class="highlight-text"><strong>Certified:</strong> ISO 9001:2015 team experience (Abaris Softech)</span>
-      </div> -->
-      <div class="highlight-item">
-        <span class="highlight-icon">🚀</span>
-        <span class="highlight-text"><strong>Focus:</strong> Healthcare, eCommerce, CRM, OTT, real-time apps</span>
-      </div>
-      <div class="highlight-item">
-        <span class="highlight-icon">💼</span>
-        <span class="highlight-text"><strong>Open to:</strong> Full-time roles and collaborative projects</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<section class="skills-section" id="skills">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-tag">What I work with</div>
-      <div class="section-title">Technical Skills</div>
-      <p class="section-sub">Production-ready across the full modern JavaScript ecosystem — mobile to backend.</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card reveal">
-        <div class="skill-card-head">
-          <div class="skill-icon si-purple">📱</div>
-          <div class="skill-cat">Mobile Development</div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">React Native</span><span class="tag">Expo</span>
+    <div class="hero-flex">
+      <div class="profile-pic-wrap">
+        <div class="profile-pic-ring"></div>
+        <div class="profile-pic has-img" id="profilePic">
+          <img src="profile_2.png" alt="Saurabh Kumar Patel" />
         </div>
       </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <div class="skill-card-head">
-          <div class="skill-icon si-teal">🌐</div>
-          <div class="skill-cat">Frontend</div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Currently available for work
         </div>
-        <div class="skill-tags">
-          <span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span><span class="tag">Bootstrap</span>
-        </div>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <div class="skill-card-head">
-          <div class="skill-icon si-coral">⚙️</div>
-          <div class="skill-cat">Backend & Database</div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span class="tag">Redis Cache</span>
-        </div>
-      </div>
-      <div class="skill-card reveal">
-        <div class="skill-card-head">
-          <div class="skill-icon si-amber">⚡</div>
-          <div class="skill-cat">Real-time & Comms</div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">WebSockets</span><span class="tag">Socket.io</span><span class="tag">WebRTC</span><span class="tag">FCM</span><span class="tag">Axios</span>
-        </div>
-      </div>
-      <div class="skill-card reveal reveal-delay-1">
-        <div class="skill-card-head">
-          <div class="skill-icon si-blue">☁️</div>
-          <div class="skill-cat">Cloud & Storage</div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">AWS S3</span><span class="tag">AWS EC2</span><span class="tag">Cloudinary</span>
-        </div>
-      </div>
-      <div class="skill-card reveal reveal-delay-2">
-        <div class="skill-card-head">
-          <div class="skill-icon si-green">🔧</div>
-          <div class="skill-cat">Languages & Tools</div>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">JavaScript ES6+</span><span class="tag">Redux</span><span class="tag">Context API</span><span class="tag">Git</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section class="exp-section" id="experience">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-tag">Career Journey</div>
-      <div class="section-title">Experience</div>
-      <p class="section-sub">Real products across healthcare, telecom, eCommerce, and digital marketing.</p>
-    </div>
-    <div class="exp-timeline">
-
-      <div class="exp-item reveal">
-        <div class="exp-dot"></div>
-        <div class="exp-meta">
-          <div class="exp-period">Dec 2025 — Present</div>
-          <div class="exp-company">G. S. Tele Communication Limited</div>
-          <div class="exp-role-line">
-            <span class="exp-role">App Developer</span>
-            <span class="exp-loc">· Gurgaon</span>
-          </div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Developing mobile apps to support spare parts &amp; accessories business operations</li>
-          <li>Building customer-facing and internal features using React Native and Expo</li>
-          <li>Collaborating with team to design, implement, and optimize app UI/UX</li>
-        </ul>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-dot"></div>
-        <div class="exp-meta">
-          <div class="exp-period">Aug 2024 — Dec 2025</div>
-          <div class="exp-company">ATRN Solution LLP (AETURN)</div>
-          <div class="exp-role-line">
-            <span class="exp-role">Software Development Engineer</span>
-            <span class="exp-loc">· Noida</span>
-          </div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Developed healthcare solutions for mobile</li>
-          <li>Implemented real-time features using WebSockets and Socket.io</li>
-          <li>Full-stack development across React Native (mobile) and React.js/Node.js (web)</li>
-          <li>Collaborated with cross-functional teams for precision-driven healthcare software</li>
-        </ul>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-dot"></div>
-        <div class="exp-meta">
-          <div class="exp-period">Mar 2024 — Jul 2024</div>
-          <div class="exp-company">Abaris Softech Pvt. Ltd.</div>
-          <div class="exp-role-line">
-            <span class="exp-role">App Developer</span>
-            <span class="exp-loc">· Delhi</span>
-          </div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Shipped mobile apps integrating third-party APIs and payment gateways</li>
-          <li>Integrated FCM push notifications for eCommerce and service-based apps</li>
-          <li>Delivered high-quality client products</li>
-        </ul>
-      </div>
-
-      <div class="exp-item reveal">
-        <div class="exp-dot"></div>
-        <div class="exp-meta">
-          <div class="exp-period">Dec 2022 — Feb 2024</div>
-          <div class="exp-company">MakSoft Pvt. Ltd.</div>
-          <div class="exp-role-line">
-            <span class="exp-role">MERN Stack Developer</span>
-            <span class="exp-loc">· Rewa</span>
-          </div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Built full-stack web apps using MongoDB, Express.js, React.js, and Node.js</li>
-          <li>Developed RESTful APIs and integrated third-party services</li>
-          <li>Implemented SEO-optimized frontends for digital marketing platforms</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects-section" id="projects">
-  <div class="section-inner">
-    <div class="section-header reveal projects-header-row">
-      <div>
-        <div class="section-tag">Portfolio</div>
-        <div class="section-title">Key Projects</div>
-        <p class="section-sub">Production apps spanning OTT, CRM, healthcare, real-time comms, and education.</p>
-      </div>
-      <button class="view-all-btn" id="viewAllBtn">View all projects <i>→</i></button>
-    </div>
-    <div class="projects-grid">
-
-      <div class="proj-card reveal">
-        <div class="proj-banner has-img" id="banner-01">
-          <!-- TO ADD BANNER: put <img src="projects/7Oak5F7UNsMI_1280_800.png" alt="Theater Crave"/> here and add class="has-img" to this div -->
-          <!-- <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div> -->
-           <img src="projects/7Oak5F7UNsMI_1280_800.png" alt="Theater Crave"/> 
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">01</span>
-            <span class="proj-date">Aug 2023</span>
-          </div>
-          <div>
-            <div class="proj-name">Theater Crave</div>
-            <div class="proj-type">App + Web</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Movie theater companion — order food from your seat with real-time tracking, seamless payment integration, and a web-based admin panel for theater staff.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">Node.js</span>
-            <span class="proj-tag">MongoDB</span>
-            <span class="proj-tag">Payment GW</span>
-            <span class="proj-tag">FCM</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal reveal-delay-1">
-        <div class="proj-banner" id="banner-02">
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">02</span>
-            <span class="proj-date">Jun 2024</span>
-          </div>
-          <div>
-            <div class="proj-name">FlipChat</div>
-            <div class="proj-type">Mobile App</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Real-time messaging app with text, voice &amp; video calls, media sharing, group chats, and end-to-end encryption. Built on WebRTC + Socket.io for P2P communication.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">WebRTC</span>
-            <span class="proj-tag">Socket.io</span>
-            <span class="proj-tag">E2E Encryption</span>
-            <span class="proj-tag">MongoDB</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal reveal-delay-2">
-        <div class="proj-banner" id="banner-03">
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">03</span>
-            <span class="proj-date">Feb 2024</span>
-          </div>
-          <div>
-            <div class="proj-name">LeadSync</div>
-            <div class="proj-type">App + Web</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Lead management CRM with lead scoring, automated follow-up workflows, analytics dashboards, and mobile app for on-the-go sales team management.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">React.js</span>
-            <span class="proj-tag">Node.js</span>
-            <span class="proj-tag">MongoDB</span>
-            <span class="proj-tag">Express.js</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-banner" id="banner-04">
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">04</span>
-            <span class="proj-date">May 2025</span>
-          </div>
-          <div>
-            <div class="proj-name">Edumug ERP</div>
-            <div class="proj-type">Mobile App</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Comprehensive school ERP covering attendance, grades, timetables, and communications — unified for students, parents, and staff in one mobile interface.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">Redux</span>
-            <span class="proj-tag">Node.js</span>
-            <span class="proj-tag">MongoDB</span>
-            <span class="proj-tag">Express.js</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal reveal-delay-1">
-        <div class="proj-banner" id="banner-05">
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">05</span>
-            <span class="proj-date">Mar 2025</span>
-          </div>
-          <div>
-            <div class="proj-name">Prime 25 OTT</div>
-            <div class="proj-type">Mobile App</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Family-friendly OTT streaming platform with adaptive streaming, content filtering, user profiles, and cross-device accessibility. Powered by Cloudinary and AWS S3.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">Expo</span>
-            <span class="proj-tag">Node.js</span>
-            <span class="proj-tag">Cloudinary</span>
-            <span class="proj-tag">AWS S3</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal reveal-delay-2">
-        <div class="proj-banner" id="banner-06">
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
-        <div class="proj-body">
-          <div class="proj-header">
-            <span class="proj-num">06</span>
-            <span class="proj-date">Jan 2022</span>
-          </div>
-          <div>
-            <div class="proj-name">TODO</div>
-            <div class="proj-type">Mobile App</div>
-          </div>
-          <div class="proj-divider"></div>
-          <div class="proj-desc">Appointment booking platform connecting users with CAs, lawyers, and consultants — browse expert profiles, schedule consultations, and get calendar reminders.</div>
-          <div class="proj-stack">
-            <span class="proj-tag">React Native</span>
-            <span class="proj-tag">Node.js</span>
-            <span class="proj-tag">MongoDB</span>
-            <span class="proj-tag">FCM</span>
-            <span class="proj-tag">Calendar</span>
-          </div>
-          <div class="proj-links">
-            <a class="proj-link disabled" href="#" target="_blank"><i>🌐</i> Website</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🤖</i> Android</a>
-            <a class="proj-link disabled" href="#" target="_blank"><i>🍎</i> iOS</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="section-tag">Let's build something</div>
-      <div class="section-title">Get in Touch</div>
-    </div>
-    <div class="contact-layout">
-      <div class="reveal">
-        <p class="contact-intro">
-          Open to <strong>full-time roles</strong> and collaborative projects.
-          Based in India — available for remote work worldwide.
-          Reach out directly using the details below.
+        <h1>
+          <span class="name">Saurabh</span>
+          <span class="role">Kumar Patel</span>
+          <span class="type">App &amp; MERN Dev.</span>
+        </h1>
+        <p class="hero-desc">
+          <strong>3+ years</strong> building scalable mobile and web apps.
+          Specializing in <strong>React Native</strong>, Node.js, WebRTC, and real-time systems —
+          from concept to production-ready software.
         </p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:saurabhkpatel.dev@gmail.com">
-            <span class="cl-icon">✉️</span> saurabhkpatel.dev@gmail.com
-          </a>
-          <a class="contact-link" href="tel:+919669233736">
-            <span class="cl-icon">📞</span> +91 9669233736
-          </a>
-          <a class="contact-link" href="https://linkedin.com/in/saurabh-patel-79aaa7235" target="_blank">
-            <span class="cl-icon">🔗</span> LinkedIn Profile
-          </a>
-          <a class="contact-link" href="https://github.com/SauarbhPatel" target="_blank">
-            <span class="cl-icon">⌨️</span> github.com/SauarbhPatel
-          </a>
-          <a class="contact-link" href="https://saurabhpatelportfolio.netlify.app" target="_blank">
-            <span class="cl-icon">🌐</span> saurabhpatelportfolio.netlify.app
-          </a>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-secondary" href="#contact">Get in Touch</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-val">3+</div>
+            <div class="stat-label">Years Exp.</div>
+          </div>
+          <div>
+            <div class="stat-val">25+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div>
+            <div class="stat-val">4</div>
+            <div class="stat-label">Companies</div>
+          </div>
+          <div>
+            <div class="stat-val">∞</div>
+            <div class="stat-label">Coffee Cups</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      scroll
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip" id="about">
+    <div class="about-inner">
+      <div class="reveal">
+        <div class="section-tag" style="margin-bottom:0.8rem;">Who I am</div>
+        <p class="about-text">
+          I'm a <strong>Results-driven Mobile App and MERN Stack Developer</strong> based in Rewa, Madhya Pradesh. I
+          build end-to-end solutions — from real-time chat and video calling apps to OTT streaming platforms and ERP
+          systems. Passionate about <strong>intuitive user experiences</strong> and delivering high-quality,
+          production-ready software.
+        </p>
+      </div>
+      <div class="about-highlights reveal reveal-delay-1">
+        <div class="highlight-item">
+          <span class="highlight-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <span class="highlight-text"><strong>Location:</strong> Rewa, Madhya Pradesh — open to remote &amp;
+            relocation</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </span>
+          <span class="highlight-text"><strong>Focus:</strong> Healthcare, eCommerce, CRM, OTT, real-time apps</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+          </span>
+          <span class="highlight-text"><strong>Open to:</strong> Full-time roles and collaborative projects</span>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ALL PROJECTS OVERLAY -->
-<div class="all-projects-overlay" id="allProjectsOverlay">
-  <div class="ap-header">
-    <div class="ap-header-inner">
-      <div>
-        <div class="section-tag">Full portfolio</div>
-        <div class="ap-title">All Projects</div>
+  <!-- SKILLS -->
+  <section class="skills-section" id="skills">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">What I work with</div>
+        <div class="section-title">Technical Skills</div>
+        <p class="section-sub">Production-ready across the full modern JavaScript ecosystem — mobile to backend.</p>
       </div>
-      <button class="ap-close" id="apCloseBtn" aria-label="Close all projects view">✕</button>
+      <div class="skills-grid">
+
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon si-purple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" />
+                <circle cx="12" cy="17" r="1" />
+              </svg>
+            </div>
+            <div class="skill-cat">Mobile Development</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">React Native</span><span class="tag">Expo</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-card-head">
+            <div class="skill-icon si-teal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div class="skill-cat">Frontend</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span><span
+              class="tag">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-card-head">
+            <div class="skill-icon si-coral">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+              </svg>
+            </div>
+            <div class="skill-cat">Backend &amp; Database</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MongoDB</span><span
+              class="tag">Redis Cache</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon si-amber">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <div class="skill-cat">Real-time &amp; Comms</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">WebSockets</span><span class="tag">Socket.io</span><span class="tag">WebRTC</span><span
+              class="tag">FCM</span><span class="tag">Axios</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-card-head">
+            <div class="skill-icon si-blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+              </svg>
+            </div>
+            <div class="skill-cat">Cloud &amp; Storage</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">AWS S3</span><span class="tag">AWS EC2</span><span class="tag">Cloudinary</span>
+          </div>
+        </div>
+
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-card-head">
+            <div class="skill-icon si-green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <div class="skill-cat">Languages &amp; Tools</div>
+          </div>
+          <div class="skill-tags">
+            <span class="tag">JavaScript ES6+</span><span class="tag">Redux</span><span class="tag">Context
+              API</span><span class="tag">Git</span>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <div class="ap-filters" id="apFilters">
-      <button class="ap-filter active" data-filter="all">All</button>
-      <button class="ap-filter" data-filter="app">App</button>
-      <button class="ap-filter" data-filter="web">Web</button>
-      <button class="ap-filter" data-filter="admin">Admin Panel</button>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="exp-section" id="experience">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Career Journey</div>
+        <div class="section-title">Experience</div>
+        <p class="section-sub">Real products across healthcare, telecom, eCommerce, and digital marketing.</p>
+      </div>
+      <div class="exp-timeline">
+
+        <div class="exp-item reveal">
+          <div class="exp-dot"></div>
+          <div class="exp-meta">
+            <div class="exp-period">Dec 2025 — Present</div>
+            <div class="exp-company">G. S. Tele Communication Limited</div>
+            <div class="exp-role-line">
+              <span class="exp-role">App Developer</span>
+              <span class="exp-loc">· Gurgaon</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developing mobile apps to support spare parts &amp; accessories business operations</li>
+            <li>Building customer-facing and internal features using React Native and Expo</li>
+            <li>Collaborating with team to design, implement, and optimize app UI/UX</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-dot"></div>
+          <div class="exp-meta">
+            <div class="exp-period">Aug 2024 — Dec 2025</div>
+            <div class="exp-company">ATRN Solution LLP (AETURN)</div>
+            <div class="exp-role-line">
+              <span class="exp-role">Software Development Engineer</span>
+              <span class="exp-loc">· Noida</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed healthcare solutions for mobile</li>
+            <li>Implemented real-time features using WebSockets and Socket.io</li>
+            <li>Full-stack development across React Native (mobile) and React.js/Node.js (web)</li>
+            <li>Collaborated with cross-functional teams for precision-driven healthcare software</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-dot"></div>
+          <div class="exp-meta">
+            <div class="exp-period">Mar 2024 — Jul 2024</div>
+            <div class="exp-company">Abaris Softech Pvt. Ltd.</div>
+            <div class="exp-role-line">
+              <span class="exp-role">App Developer</span>
+              <span class="exp-loc">· Delhi</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Shipped mobile apps integrating third-party APIs and payment gateways</li>
+            <li>Integrated FCM push notifications for eCommerce and service-based apps</li>
+            <li>Delivered high-quality client products</li>
+          </ul>
+        </div>
+
+        <div class="exp-item reveal">
+          <div class="exp-dot"></div>
+          <div class="exp-meta">
+            <div class="exp-period">Dec 2022 — Feb 2024</div>
+            <div class="exp-company">MakSoft Pvt. Ltd.</div>
+            <div class="exp-role-line">
+              <span class="exp-role">MERN Stack Developer</span>
+              <span class="exp-loc">· Rewa</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built full-stack web apps using MongoDB, Express.js, React.js, and Node.js</li>
+            <li>Developed RESTful APIs and integrated third-party services</li>
+            <li>Implemented SEO-optimized frontends for digital marketing platforms</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects-section" id="projects">
+    <div class="section-inner">
+      <div class="section-header reveal projects-header-row">
+        <div>
+          <div class="section-tag">Portfolio</div>
+          <div class="section-title">Key Projects</div>
+          <p class="section-sub">Production apps spanning OTT, CRM, healthcare, real-time comms, and education.</p>
+        </div>
+        <button class="view-all-btn" id="viewAllBtn">
+          View all projects
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+      </div>
+      <div class="projects-grid">
+
+        <div class="proj-card reveal">
+          <div class="proj-banner has-img">
+            <img src="projects/7Oak5F7UNsMI_1280_800.png" alt="Theater Crave" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">01</span>
+              <span class="proj-date">Aug 2023</span>
+            </div>
+            <div>
+              <div class="proj-name">Theater Crave</div>
+              <div class="proj-type">App + Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Movie theater companion — order food from your seat with real-time tracking, seamless
+              payment integration, and a web-based admin panel for theater staff.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Payment GW</span>
+              <span class="proj-tag">FCM</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.theatercrave&hl=en"
+                target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-banner has-img">
+            <img src="projects/df9GYNEur8uY_1280_800.png" alt="Flatshare Karo" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">02</span>
+              <span class="proj-date">May 2026</span>
+            </div>
+            <div>
+              <div class="proj-name">Flatshare Karo</div>
+              <div class="proj-type">App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Find your next flatmate or room nearby in just 2 minutes with city-wise discovery,
+              room details, and direct messaging features.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Express</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://www.flatsharekaro.in/" target="_blank" rel="noopener noreferrer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.flatsharekaro"
+                target="_blank" rel="noopener noreferrer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal reveal-delay-2">
+          <div class="proj-banner has-img">
+            <img src="projects/hVe0HiUvceQR_1280_800.png" alt="Glozey Beauty at Home" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">03</span>
+              <span class="proj-date">Nov 2025</span>
+            </div>
+            <div>
+              <div class="proj-name">Glozey</div>
+              <div class="proj-type">App + Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Salon-style beauty services delivered straight to your doorstep — facials, waxing,
+              hair styling, and professional partner onboarding.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Express</span>
+              <span class="proj-tag">Payment GW</span>
+              <span class="proj-tag">FCM</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal">
+          <div class="proj-banner has-img">
+            <img src="projects/IRjkuKHInKynKu_1280_800.png" alt="Edumug ERP" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">04</span>
+              <span class="proj-date">May 2025</span>
+            </div>
+            <div>
+              <div class="proj-name">Edumug ERP</div>
+              <div class="proj-type">Mobile App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Comprehensive school ERP covering attendance, grades, timetables, and communications
+              — unified for students, parents, and staff in one mobile interface.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Redux</span>
+              <span class="proj-tag">FCM</span>
+              <span class="proj-tag">Payment GW</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.edumug.erp" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link " href="https://apps.apple.com/in/app/edumug-erp/id6746067162" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-banner has-img">
+            <img src="projects/0Rj707Qttnlw_1280_800.png" alt="Find Your Masjid" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">05</span>
+              <span class="proj-date">Aug 2026</span>
+            </div>
+            <div>
+              <div class="proj-name">Find Your Masjid</div>
+              <div class="proj-type">App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Locate nearby masjids easily and stay connected with prayer times, Islamic events,
+              and your local Muslim community anytime, anywhere.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Google Maps API</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://namaztimetable.com/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal reveal-delay-2">
+          <div class="proj-banner has-img">
+            <img src="projects/0Ve0HiKTseQR_1280_800.png" alt="NoteBook" />
+          </div>
+
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">06</span>
+              <span class="proj-date">Jan 2022</span>
+            </div>
+            <div>
+              <div class="proj-name">NoteBook</div>
+              <div class="proj-type">Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Securely store your notes and passwords with end-to-end encryption. Your sensitive
+              data stays completely private and accessible only to you.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">ReactJs</span>
+              <span class="proj-tag">Context API</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">Express.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">JWT</span>
+              <span class="proj-tag">Crypto</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://notebook-book.onrender.com/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <div class="proj-banner has-img">
+            <img src="projects/ONhtRODn9rlN_1280_800.png" alt="Baofeng Radios" />
+          </div>
+
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">07</span>
+              <span class="proj-date">Jul 2026</span>
+            </div>
+
+            <div>
+              <div class="proj-name">Baofeng Radios</div>
+              <div class="proj-type">E-Commerce App</div>
+            </div>
+
+            <div class="proj-divider"></div>
+
+            <div class="proj-desc">
+              A modern e-commerce platform for BAOFENG communication devices, allowing customers to explore products,
+              manage orders, and securely purchase professional radios and accessories with a seamless shopping
+              experience.
+            </div>
+
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Redux</span>
+              <span class="proj-tag">FCM</span>
+              <span class="proj-tag">Razorpay</span>
+            </div>
+
+            <div class="proj-links">
+              <a class="proj-link" href="https://baofengradios.com/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.baofengradios"
+                target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+
+              <a class="proj-link" href="https://apps.apple.com/in/app/baofeng-radios/id6757856127" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Let's build something</div>
+        <div class="section-title">Get in Touch</div>
+      </div>
+      <div class="contact-layout">
+        <div class="reveal">
+          <p class="contact-intro">
+            Open to <strong>full-time roles</strong> and collaborative projects.
+            Based in India — available for remote work worldwide.
+            Reach out directly using the details below.
+          </p>
+          <div class="contact-links">
+            <a class="contact-link" href="mailto:saurabhkpatel.dev@gmail.com">
+              <span class="cl-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </span>
+              saurabhkpatel.dev@gmail.com
+            </a>
+            <a class="contact-link" href="tel:+919669233736">
+              <span class="cl-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.58a16 16 0 0 0 5.51 5.51l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z" />
+                </svg>
+              </span>
+              +91 9669233736
+            </a>
+            <a class="contact-link" href="https://linkedin.com/in/saurabh-patel-79aaa7235" target="_blank">
+              <span class="cl-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </span>
+              LinkedIn Profile
+            </a>
+            <a class="contact-link" href="https://github.com/SauarbhPatel" target="_blank">
+              <span class="cl-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              </span>
+              github.com/SauarbhPatel
+            </a>
+            <a class="contact-link" href="https://saurabhpatelportfolio.netlify.app" target="_blank">
+              <span class="cl-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+              </span>
+              saurabhpatelportfolio.netlify.app
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL PROJECTS OVERLAY -->
+  <div class="all-projects-overlay" id="allProjectsOverlay">
+    <div class="ap-header">
+      <div class="ap-header-inner">
+        <div>
+          <div class="section-tag">Full portfolio</div>
+          <div class="ap-title">All Projects</div>
+        </div>
+        <button class="ap-close" id="apCloseBtn" aria-label="Close all projects view">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="ap-filters" id="apFilters">
+        <button class="ap-filter active" data-filter="all">All</button>
+        <button class="ap-filter" data-filter="app">App</button>
+        <button class="ap-filter" data-filter="web">Web</button>
+        <button class="ap-filter" data-filter="admin">Admin Panel</button>
+      </div>
+    </div>
+    <div class="ap-body">
+      <div class="projects-grid ap-grid" id="apGrid"></div>
     </div>
   </div>
-  <div class="ap-body">
-    <div class="projects-grid ap-grid" id="apGrid"></div>
-  </div>
-</div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-copy">© 2025 Saurabh Kumar Patel · Built with passion in India 🇮🇳</div>
-  <div class="footer-links">
-    <a href="https://github.com/SauarbhPatel" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/saurabh-patel-79aaa7235" target="_blank">LinkedIn</a>
-    <a href="https://saurabhpatelportfolio.netlify.app" target="_blank">Portfolio</a>
-  </div>
-  <a class="back-to-top" href="#home">↑ Back to top</a>
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-copy">© 2025 Saurabh Kumar Patel · Built with passion in India</div>
+    <div class="footer-links">
+      <a href="https://github.com/SauarbhPatel" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/saurabh-patel-79aaa7235" target="_blank">LinkedIn</a>
+      <a href="https://saurabhpatelportfolio.netlify.app" target="_blank">Portfolio</a>
+    </div>
+    <a class="back-to-top" href="#home">↑ Back to top</a>
+  </footer>
 
-<script>
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-function animateCursor() {
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-document.querySelectorAll('a, button, .proj-card, .skill-card, .contact-link, .highlight-item').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a, button, .proj-card, .skill-card, .contact-link, .highlight-item').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
 
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Active nav link on scroll
-const sections = document.querySelectorAll('section[id], div.about-strip[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-  navLinks.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
-  });
-});
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], div.about-strip[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+      });
+    });
 
-// Theme toggle (dark/light mode)
-const themeToggle = document.getElementById('themeToggle');
-const htmlEl = document.documentElement;
-function setTheme(mode) {
-  if (mode === 'light') {
-    htmlEl.setAttribute('data-theme', 'light');
-    themeToggle.textContent = '☀️';
-  } else {
-    htmlEl.removeAttribute('data-theme');
-    themeToggle.textContent = '🌙';
-  }
-  localStorage.setItem('sp-theme', mode);
-}
-const savedTheme = localStorage.getItem('sp-theme') || 'dark';
-setTheme(savedTheme);
-themeToggle.addEventListener('click', () => {
-  const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-  setTheme(current === 'light' ? 'dark' : 'light');
-});
+    // Theme toggle (dark/light mode)
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+    const iconMoon = document.getElementById('iconMoon');
+    const iconSun = document.getElementById('iconSun');
+    function setTheme(mode) {
+      if (mode === 'light') {
+        htmlEl.setAttribute('data-theme', 'light');
+        iconMoon.style.display = 'none';
+        iconSun.style.display = '';
+      } else {
+        htmlEl.removeAttribute('data-theme');
+        iconMoon.style.display = '';
+        iconSun.style.display = 'none';
+      }
+      localStorage.setItem('sp-theme', mode);
+    }
+    const savedTheme = localStorage.getItem('sp-theme') || 'dark';
+    setTheme(savedTheme);
+    themeToggle.addEventListener('click', () => {
+      const current = htmlEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      setTheme(current === 'light' ? 'dark' : 'light');
+    });
 
-// ─── All Projects overlay ───────────────────────────
-const projectsData = [
-  {
-    num: '01', date: 'Aug 2023', name: 'Theater Crave', type: 'App + Web',
-    categories: ['app', 'web', 'admin'],
-    desc: 'Movie theater companion — order food from your seat with real-time tracking, seamless payment integration, and a web-based admin panel for theater staff.',
-    stack: ['React Native', 'Node.js', 'MongoDB', 'Payment GW', 'FCM'],
-    links: { website: '', android: '', ios: '' }
-  },
-  {
-    num: '02', date: 'Jun 2024', name: 'FlipChat', type: 'Mobile App',
-    categories: ['app'],
-    desc: 'Real-time messaging app with text, voice & video calls, media sharing, group chats, and end-to-end encryption. Built on WebRTC + Socket.io for P2P communication.',
-    stack: ['React Native', 'WebRTC', 'Socket.io', 'E2E Encryption', 'MongoDB'],
-    links: { website: '', android: '', ios: '' }
-  },
-  {
-    num: '03', date: 'Feb 2024', name: 'LeadSync', type: 'App + Web',
-    categories: ['app', 'web', 'admin'],
-    desc: 'Lead management CRM with lead scoring, automated follow-up workflows, analytics dashboards, and mobile app for on-the-go sales team management.',
-    stack: ['React Native', 'React.js', 'Node.js', 'MongoDB', 'Express.js'],
-    links: { website: '', android: '', ios: '' }
-  },
-  {
-    num: '04', date: 'May 2025', name: 'Edumug ERP', type: 'Mobile App',
-    categories: ['app', 'admin'],
-    desc: 'Comprehensive school ERP covering attendance, grades, timetables, and communications — unified for students, parents, and staff in one mobile interface.',
-    stack: ['React Native', 'Redux', 'Node.js', 'MongoDB', 'Express.js'],
-    links: { website: '', android: '', ios: '' }
-  },
-  {
-    num: '05', date: 'Mar 2025', name: 'Prime 25 OTT', type: 'Mobile App',
-    categories: ['app'],
-    desc: 'Family-friendly OTT streaming platform with adaptive streaming, content filtering, user profiles, and cross-device accessibility. Powered by Cloudinary and AWS S3.',
-    stack: ['React Native', 'Expo', 'Node.js', 'Cloudinary', 'AWS S3'],
-    links: { website: '', android: '', ios: '' }
-  },
-  {
-    num: '06', date: 'Jan 2022', name: 'TODO', type: 'Mobile App',
-    categories: ['app'],
-    desc: 'Appointment booking platform connecting users with CAs, lawyers, and consultants — browse expert profiles, schedule consultations, and get calendar reminders.',
-    stack: ['React Native', 'Node.js', 'MongoDB', 'FCM', 'Calendar'],
-    links: { website: '', android: '', ios: '' }
-  }
-];
+    // Mobile nav
+    const mobileNav = document.getElementById('mobileNav');
+    const navHamburger = document.getElementById('navHamburger');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+    function openMobileNav() {
+      mobileNav.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    navHamburger.addEventListener('click', openMobileNav);
+    mobileNavClose.addEventListener('click', closeMobileNav);
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', closeMobileNav);
+    });
 
-const catLabels = { app: 'App', web: 'Web', admin: 'Admin Panel' };
-const apGrid = document.getElementById('apGrid');
+    // ─── All Projects overlay ───────────────────────────
 
-function renderApGrid() {
-  apGrid.innerHTML = projectsData.map((p, i) => {
-    const badges = p.categories.map(c => `<span class="proj-cat-badge">${catLabels[c]}</span>`).join('');
-    const linkRow = ['website', 'android', 'ios'].map(key => {
-      const icon = key === 'website' ? '🌐' : key === 'android' ? '🤖' : '🍎';
-      const label = key === 'website' ? 'Website' : key === 'android' ? 'Android' : 'iOS';
-      const url = p.links[key];
-      const disabled = url ? '' : ' disabled';
-      const href = url || '#';
-      return `<a class="proj-link${disabled}" href="${href}" target="_blank"><i>${icon}</i> ${label}</a>`;
-    }).join('');
-    const stackTags = p.stack.map(s => `<span class="proj-tag">${s}</span>`).join('');
-    return `
-      <div class="proj-card ap-card" data-cats="${p.categories.join(',')}">
-        <div class="proj-banner" id="ap-banner-${p.num}">
+    const projectsData = [
+      {
+        num: '01',
+        date: 'Aug 2023',
+        name: 'Theater Crave',
+        type: 'App + Web',
+        categories: ['app', 'web', 'admin'],
+        banner: "projects/7Oak5F7UNsMI_1280_800.png",
+        desc: 'Movie theater companion — order food from your seat with real-time tracking, seamless payment integration, and a web-based admin panel for theater staff.',
+        stack: ['React Native', 'Node.js', 'MongoDB', 'Payment GW', 'FCM'],
+        links: {
+          website: '',
+          android: 'https://play.google.com/store/apps/details?id=com.theatercrave&hl=en',
+          ios: ''
+        }
+      },
+      {
+        num: '02',
+        date: 'May 2026',
+        name: 'Flatshare Karo',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/df9GYNEur8uY_1280_800.png",
+        desc: 'Find your next flatmate or room nearby in just 2 minutes with city-wise discovery, room details, and direct messaging features.',
+        stack: ['React Native', 'Node.js', 'MongoDB', 'Express'],
+        links: {
+          website: 'https://www.flatsharekaro.in/',
+          android: 'https://play.google.com/store/apps/details?id=com.flatsharekaro',
+          ios: ''
+        }
+      },
+      {
+        num: '03',
+        date: 'Nov 2025',
+        name: 'Glozey',
+        type: 'App + Web',
+        categories: ['app', 'web'],
+        banner: "projects/hVe0HiUvceQR_1280_800.png",
+        desc: 'Salon-style beauty services delivered straight to your doorstep — facials, waxing, hair styling, and professional partner onboarding.',
+        stack: ['React Native', 'Expo', 'Node.js', 'MongoDB', 'Express', 'Payment GW', 'FCM'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '04',
+        date: 'May 2025',
+        name: 'Edumug ERP',
+        type: 'Mobile App',
+        categories: ['app', 'admin'],
+        banner: "projects/IRjkuKHInKynKu_1280_800.png",
+        desc: 'Comprehensive school ERP covering attendance, grades, timetables, and communications — unified for students, parents, and staff in one mobile interface.',
+        stack: ['React Native', 'Expo', 'Redux', 'FCM', 'Payment GW'],
+        links: {
+          website: '',
+          android: 'https://play.google.com/store/apps/details?id=com.edumug.erp',
+          ios: 'https://apps.apple.com/in/app/edumug-erp/id6746067162'
+        }
+      },
+      {
+        num: '05',
+        date: 'Aug 2026',
+        name: 'Find Your Masjid',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/0Rj707Qttnlw_1280_800.png",
+        desc: 'Locate nearby masjids easily and stay connected with prayer times, Islamic events, and your local Muslim community anytime, anywhere.',
+        stack: ['React Native', 'Expo', 'Google Maps API'],
+        links: {
+          website: 'https://namaztimetable.com/',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '06',
+        date: 'Jan 2022',
+        name: 'NoteBook',
+        type: 'Web',
+        categories: ['web'],
+        banner: "projects/0Ve0HiKTseQR_1280_800.png",
+        desc: 'Securely store your notes and passwords with end-to-end encryption. Your sensitive data stays completely private and accessible only to you.',
+        stack: ['ReactJs', 'Context API', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'Crypto'],
+        links: {
+          website: 'https://notebook-book.onrender.com/',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '07',
+        date: 'Jul 2026',
+        name: 'Baofeng Radios',
+        type: 'E-Commerce App',
+        categories: ['app'],
+        banner: "projects/ONhtRODn9rlN_1280_800.png",
+        desc: 'A modern e-commerce platform for BAOFENG communication devices, allowing customers to explore products, manage orders, and securely purchase professional radios and accessories with a seamless shopping experience.',
+        stack: ['React Native', 'Expo', 'Redux', 'FCM', 'Razorpay'],
+        links: {
+          website: 'https://baofengradios.com/',
+          android: 'https://play.google.com/store/apps/details?id=com.baofengradios',
+          ios: 'https://apps.apple.com/in/app/baofeng-radios/id6757856127'
+        }
+      },
+      {
+        num: '08',
+        date: 'Jun 2024',
+        name: 'FlipChat',
+        type: 'Mobile App',
+        categories: ['app'],
+        banner: "projects/1NhERiDn9rlP_1280_800.png",
+        desc: 'Real-time messaging app with text, voice & video calls, media sharing, group chats, and end-to-end encryption. Built on WebRTC + Socket.io for P2P communication.',
+        stack: ['React Native', 'WebRTC', 'Socket.io', 'Redux', 'FCM', 'E2E Encryption', 'Node.js', 'Express.js', 'MongoDB',],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '09',
+        date: 'Feb 2024',
+        name: 'LeadSync',
+        type: 'App + Web',
+        categories: ['app', 'web', 'admin'],
+        banner: "projects/8UhtRpDq9rlL_1280_800.png",
+        desc: 'Lead management CRM with lead scoring, automated follow-up workflows, analytics dashboards, and mobile app for on-the-go sales team management.',
+        stack: ['React Native', 'Expo', 'React.js', 'Node.js', 'MongoDB', 'Express.js'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '10',
+        date: 'Mar 2025',
+        name: 'Prime 25 OTT',
+        type: 'Mobile App',
+        categories: ['app'],
+        banner: "projects/LNqlROSn9rlN_1280_800.png",
+        desc: 'Family-friendly OTT streaming platform with adaptive streaming, content filtering, user profiles, and cross-device accessibility. Powered by Cloudinary and AWS S3.',
+        stack: ['React Native', 'Expo', 'Redux', 'Node.js', 'Cloudinary', 'AWS S3'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '11',
+        date: 'Jan 2022',
+        name: 'TODO',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/LNEsIODn0rl1_1280_800.png",
+        desc: 'Book appointments with professionals like CAs, CSs, and lawyers. Schedule consultations, manage bookings, and connect with verified experts from a single platform.',
+        stack: ['React Native', 'Expo', 'Redux', 'Payment GW'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '12',
+        date: 'Sep 2023',
+        name: 'RedElectro',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/KShqRO1n9rll_1280_800.png",
+        desc: 'B2B e-commerce platform for electrical products, enabling retailers and wholesalers to browse catalogs, place bulk orders, and manage inventory efficiently.',
+        stack: ['React Native', 'Expo', 'Redux', 'Payment GW'],
+        links: {
+          website: 'https://redelectro.in/₹₹',
+          android: 'https://play.google.com/store/apps/details?id=com.led.redelectro&hl=en_IN',
+          ios: ''
+        }
+      },
+      {
+        num: '13',
+        date: 'Oct 2023',
+        name: 'Digital Chunav Prachar',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/Sk1tROkn9rlq2_1280_800.png",
+        desc: 'Election campaign management app for organizing voters, managing campaign activities, and tracking constituency data with an easy-to-use interface.',
+        stack: ['React Native', 'Expo', 'Redux', 'Node.js', "Express.js", 'MongoDB'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '14',
+        date: 'Aug 2025',
+        name: 'Car Parking Sticker',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/KwhtQO2n9rKN_1280_800.png",
+        desc: 'QR-based smart parking sticker solution that helps vehicle owners share emergency contact details securely in case of parking issues or emergencies.',
+        stack: ['React Native', 'Expo', 'QR Code'],
+        links: {
+          website: 'https://carparkingsticker.com/',
+          android: 'https://play.google.com/store/apps/details?id=com.carparkingsticker&hl=en_IN',
+          ios: 'https://apps.apple.com/in/app/car-parking-sticker/id6748760478'
+        }
+      },
+      {
+        num: '15',
+        date: 'May 2025',
+        name: 'HUNER',
+        type: 'App',
+        categories: ['app'],
+        banner: "projects/Lsht1ODnSrll_1280_800.png",
+        desc: 'Business management app for tailors to manage customer orders, measurements, delivery schedules, and stitching workflow from a single dashboard.',
+        stack: ['React Native', 'Expo', 'Redux', 'Node.js', "Express.js", 'MongoDB'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      }
+    ];
+    const catLabels = { app: 'App', web: 'Web', admin: 'Admin Panel' };
+    const apGrid = document.getElementById('apGrid');
+
+    const globeSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
+    const androidSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z"/></svg>`;
+    const iosSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>`;
+    const imgPlaceholderSvg = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+
+    function renderApGrid() {
+      apGrid.innerHTML = projectsData.map((p) => {
+        const badges = p.categories.map(c => `<span class="proj-cat-badge">${catLabels[c]}</span>`).join('');
+        const icons = { website: globeSvg, android: androidSvg, ios: iosSvg };
+        const labels = { website: 'Website', android: 'Android', ios: 'iOS' };
+
+        const linkRow = ['website', 'android', 'ios'].map(key => {
+          const url = p.links[key];
+          const disabled = url ? '' : ' disabled';
+          const href = url || '#';
+          return `<a class="proj-link${disabled}" href="${href}" target="_blank">${icons[key]} ${labels[key]}</a>`;
+        }).join('');
+
+        const stackTags = p.stack.map(s => `<span class="proj-tag">${s}</span>`).join('');
+
+        // Banner HTML condition (Fixed syntax error)
+        const bannerHtml = !p?.banner
+          ? `<div class="proj-banner">
           <div class="proj-cat-badges">${badges}</div>
-          <div class="proj-banner-placeholder"><i>🖼️</i><span>Add project banner image</span></div>
-        </div>
+          <div class="proj-banner-placeholder">${imgPlaceholderSvg}<span>Project preview</span></div>
+        </div>`
+          : `<div class="proj-banner has-img">
+          <div class="proj-cat-badges">${badges}</div>
+          <img src="${p.banner}" alt="${p.name}" />
+        </div>`;
+
+        return `
+      <div class="proj-card ap-card" data-cats="${p.categories.join(',')}">
+        ${bannerHtml}
         <div class="proj-body">
           <div class="proj-header">
             <span class="proj-num">${p.num}</span>
@@ -1174,45 +2886,44 @@ function renderApGrid() {
           <div class="proj-links">${linkRow}</div>
         </div>
       </div>`;
-  }).join('');
+      }).join('');
 
-  // re-bind cursor hover for new cards
-  apGrid.querySelectorAll('.proj-card, .proj-link').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
-}
-renderApGrid();
+      apGrid.querySelectorAll('.proj-card, .proj-link').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
 
-const apOverlay = document.getElementById('allProjectsOverlay');
-const apFilters = document.getElementById('apFilters');
+    renderApGrid();
 
-function openAllProjects() {
-  apOverlay.classList.add('open');
-  document.body.classList.add('ap-locked');
-}
-function closeAllProjects() {
-  apOverlay.classList.remove('open');
-  document.body.classList.remove('ap-locked');
-}
-document.getElementById('viewAllBtn').addEventListener('click', openAllProjects);
-document.getElementById('apCloseBtn').addEventListener('click', closeAllProjects);
+    const apOverlay = document.getElementById('allProjectsOverlay');
+    const apFilters = document.getElementById('apFilters');
 
-apFilters.addEventListener('click', (e) => {
-  const btn = e.target.closest('.ap-filter');
-  if (!btn) return;
-  apFilters.querySelectorAll('.ap-filter').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const filter = btn.dataset.filter;
-  const cards = apGrid.querySelectorAll('.ap-card');
-  let visibleCount = 0;
-  cards.forEach(card => {
-    const cats = card.dataset.cats.split(',');
-    const show = filter === 'all' || cats.includes(filter);
-    card.classList.toggle('ap-card-hidden', !show);
-    if (show) visibleCount++;
-  });
-});
-</script>
+    function openAllProjects() {
+      apOverlay.classList.add('open');
+      document.body.classList.add('ap-locked');
+    }
+    function closeAllProjects() {
+      apOverlay.classList.remove('open');
+      document.body.classList.remove('ap-locked');
+    }
+    document.getElementById('viewAllBtn').addEventListener('click', openAllProjects);
+    document.getElementById('apCloseBtn').addEventListener('click', closeAllProjects);
+
+    apFilters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.ap-filter');
+      if (!btn) return;
+      apFilters.querySelectorAll('.ap-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      const cards = apGrid.querySelectorAll('.ap-card');
+      cards.forEach(card => {
+        const cats = card.dataset.cats.split(',');
+        const show = filter === 'all' || cats.includes(filter);
+        card.classList.toggle('ap-card-hidden', !show);
+      });
+    });
+  </script>
 </body>
+
 </html>
