@@ -759,6 +759,302 @@
       line-height: 1.75;
     }
 
+    /* ─── FEATURED PRODUCTS (sidebar + detail panel) ─── */
+    section.product-section {
+      background: var(--bg);
+      padding: 3rem 6% 1rem;
+    }
+
+    .fp-wrap {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .fp-side {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    .fp-head {
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg2);
+      padding: 1.2rem 1.3rem;
+    }
+
+    .fp-head .section-tag {
+      margin-bottom: 0.3rem;
+    }
+
+    .fp-head h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .fp-head p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+
+    .fp-tile {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 104px;
+      padding: 0;
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg3);
+      overflow: hidden;
+      text-align: left;
+      color: #fff;
+      font-family: inherit;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .fp-tile.fp-grad,
+    .fp-media.fp-grad {
+      background: linear-gradient(135deg, #ff8a3d, #ff4f6d 60%, #7c6fff);
+    }
+
+    .fp-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .fp-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 35%, rgba(10, 10, 15, 0.85));
+    }
+
+    .fp-tile-label {
+      position: absolute;
+      left: 0.9rem;
+      right: 0.9rem;
+      bottom: 0.65rem;
+      z-index: 1;
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .fp-tile-label small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .fp-tile:hover {
+      border-color: var(--accent);
+    }
+
+    .fp-tile:hover img,
+    .fp-tile[aria-selected="true"] img {
+      opacity: 1;
+    }
+
+    .fp-tile[aria-selected="true"] {
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.15);
+    }
+
+    .fp-tile.fp-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border-style: dashed;
+      color: var(--muted);
+      font-family: var(--font-head);
+      font-size: 0.9rem;
+      font-weight: 700;
+      height: 64px;
+    }
+
+    .fp-tile.fp-more:hover {
+      color: var(--accent);
+    }
+
+    .fp-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      border: 0.5px solid rgba(124, 111, 255, 0.45);
+      border-radius: 18px;
+      background: var(--bg2);
+      overflow: hidden;
+      box-shadow: 0 0 0 4px rgba(124, 111, 255, 0.06), 0 24px 70px rgba(124, 111, 255, 0.1);
+    }
+
+    .fp-panel[hidden] {
+      display: none;
+    }
+
+    .fp-panel.fp-in {
+      animation: fpIn 0.3s ease both;
+    }
+
+    @keyframes fpIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .fp-media {
+      background: var(--bg3);
+      max-height: 250px;
+      overflow: hidden;
+    }
+
+    .fp-media img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fp-info {
+      padding: 1.6rem 1.8rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .fp-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--accent3);
+    }
+
+    .fp-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    .fp-title span {
+      color: var(--accent);
+    }
+
+    .fp-info p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      max-width: 62ch;
+    }
+
+    .fp-info p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .fp-points {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.45rem 0.9rem;
+    }
+
+    .fp-points li {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .fp-points li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent3);
+      font-weight: 700;
+    }
+
+    .fp-ctas {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .fp-ctas .btn-primary,
+    .fp-ctas .btn-secondary {
+      padding: 0.6rem 1.3rem;
+    }
+
+    .proj-ribbon {
+      position: absolute;
+      top: 0.8rem;
+      left: 0.8rem;
+      z-index: 2;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 5px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .fp-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .fp-side {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fp-head {
+        grid-column: 1 / -1;
+      }
+
+      .fp-tile.fp-more {
+        grid-column: 1 / -1;
+      }
+
+      .fp-media,
+      .fp-media img {
+        max-height: 190px;
+        height: 190px;
+      }
+
+      .fp-info {
+        padding: 1.3rem 1.2rem 1.5rem;
+      }
+
+      .fp-points {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     /* ─── ABOUT STRIP ─────────────────────────────────── */
     .about-strip {
       background: var(--bg2);
@@ -983,6 +1279,11 @@
       box-shadow: 0 0 0 6px rgba(124, 111, 255, 0.15);
     }
 
+    .exp-item.featured .exp-dot {
+      background: var(--accent3);
+      box-shadow: 0 0 0 5px rgba(0, 217, 180, 0.2);
+    }
+
     .exp-meta {
       margin-bottom: 0.5rem;
     }
@@ -1021,6 +1322,17 @@
       font-family: var(--font-mono);
     }
 
+    .exp-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.03em;
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(0, 217, 180, 0.12);
+      color: var(--accent3);
+      border: 0.5px solid rgba(0, 217, 180, 0.35);
+    }
+
     .exp-bullets {
       list-style: none;
       margin-top: 0.85rem;
@@ -1043,6 +1355,20 @@
       left: 0;
       color: var(--accent);
       font-weight: 600;
+    }
+
+    .exp-bullets strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .exp-bullets a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .exp-bullets a:hover {
+      text-decoration: underline;
     }
 
     /* ─── PROJECTS ────────────────────────────────────── */
@@ -1621,6 +1947,10 @@
         padding: 5rem 4%;
       }
 
+      section.product-section {
+        padding: 3rem 4% 1rem;
+      }
+
       .about-inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -1727,7 +2057,7 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          Currently available for work
+          App Developer @ Brythm · Tiffexx
         </div>
         <h1>
           <span class="name">Saurabh</span>
@@ -1737,10 +2067,12 @@
         <p class="hero-desc">
           <strong>3+ years</strong> building scalable mobile and web apps.
           Specializing in <strong>React Native</strong>, Node.js, WebRTC, and real-time systems —
-          from concept to production-ready software.
+          from concept to production-ready software. Now building <strong>Tiffexx</strong> at Brythm.
+          Earlier products: <strong>Baofeng Radios</strong> and <strong>Glozey</strong>.
         </p>
         <div class="hero-ctas">
-          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-primary" href="#product">Featured Products</a>
+          <a class="btn-secondary" href="#projects">View Projects</a>
           <a class="btn-secondary" href="#contact">Get in Touch</a>
         </div>
         <div class="hero-stats">
@@ -1766,6 +2098,135 @@
     <div class="scroll-indicator">
       <div class="scroll-line"></div>
       scroll
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section class="product-section" id="product">
+    <div class="section-inner">
+      <div class="fp-wrap reveal">
+
+        <div class="fp-side" role="tablist" aria-label="Featured products">
+          <div class="fp-head">
+            <div class="section-tag">Shipped work</div>
+            <h2>Featured Products</h2>
+            <p>Products I built and shipped, not just demos.</p>
+          </div>
+
+          <button class="fp-tile fp-grad" role="tab" id="tab-tiffexx" aria-selected="true" aria-controls="fp-tiffexx"
+            data-target="fp-tiffexx" type="button">
+            <img src="projects/tiffexx_1280_800.png" alt="" onerror="this.style.display='none'" />
+            <span class="fp-tile-label">Tiffexx<small>Current · Brythm</small></span>
+          </button>
+
+          <button class="fp-tile" role="tab" id="tab-baofeng" aria-selected="false" aria-controls="fp-baofeng"
+            data-target="fp-baofeng" type="button" tabindex="-1">
+            <img src="projects/ONhtRODn9rlN_1280_800.png" alt="" />
+            <span class="fp-tile-label">Baofeng Radios<small>E-commerce app</small></span>
+          </button>
+
+          <button class="fp-tile" role="tab" id="tab-glozey" aria-selected="false" aria-controls="fp-glozey"
+            data-target="fp-glozey" type="button" tabindex="-1">
+            <img src="projects/hVe0HiUvceQR_1280_800.png" alt="" />
+            <span class="fp-tile-label">Glozey<small>Beauty at home</small></span>
+          </button>
+
+          <button class="fp-tile fp-more" type="button" onclick="openAllProjects()">All projects →</button>
+        </div>
+
+        <div class="fp-main">
+          <!-- Tiffexx -->
+          <div class="fp-panel" id="fp-tiffexx" role="tabpanel" aria-labelledby="tab-tiffexx">
+            <div class="fp-media fp-grad">
+              <img src="projects/tiffexx_1280_800.png" alt="Tiffexx app" onerror="this.style.display='none'" />
+            </div>
+            <div class="fp-info">
+              <div class="fp-eyebrow">Current · Brythm Private Limited</div>
+              <h3 class="fp-title"><span>Tiffexx</span>, homemade tiffins at your doorstep</h3>
+              <p>
+                <strong>Tiffexx</strong> is the product of Brythm Private Limited, where I work now. Customers order
+                lunch and dinner tiffins from local home kitchens, one-time or on subscription, and track delivery live.
+              </p>
+              <ul class="fp-points">
+                <li>Lunch &amp; dinner tiffins</li>
+                <li>One-time + subscription</li>
+                <li>Live order tracking</li>
+                <li>Secure payments</li>
+                <li>Customer, kitchen &amp; delivery apps</li>
+                <li>Live on Google Play</li>
+              </ul>
+              <div class="fp-ctas">
+                <a class="btn-primary" href="https://www.tiffexx.com/" target="_blank"
+                  rel="noopener noreferrer">Visit Website</a>
+                <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.tiffexx.user"
+                  target="_blank" rel="noopener noreferrer">Customer app</a>
+                <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.tiffexx.restaurant"
+                  target="_blank" rel="noopener noreferrer">Tiffin Partners</a>
+                <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.tiffexx.delivery"
+                  target="_blank" rel="noopener noreferrer">Delivery Partners</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Baofeng Radios -->
+          <div class="fp-panel" id="fp-baofeng" role="tabpanel" aria-labelledby="tab-baofeng" hidden>
+            <div class="fp-media">
+              <img src="projects/ONhtRODn9rlN_1280_800.png" alt="Baofeng Radios app" />
+            </div>
+            <div class="fp-info">
+              <div class="fp-eyebrow">Built at G. S. Tele Communication</div>
+              <h3 class="fp-title"><span>Baofeng Radios</span>, the e-commerce app I built</h3>
+              <p>
+                Customer app for BAOFENG communication devices at <strong>G. S. Tele Communication Limited</strong>,
+                a product-based company. Browse radios, place orders and pay online. Live on Android and iOS.
+              </p>
+              <ul class="fp-points">
+                <li>Play Store &amp; App Store</li>
+                <li>Razorpay payments</li>
+                <li>Firebase + FCM push</li>
+                <li>Deep linking</li>
+                <li>Listing &amp; filters</li>
+                <li>React Native + Expo</li>
+              </ul>
+              <div class="fp-ctas">
+                <a class="btn-primary" href="https://baofengradios.com/" target="_blank"
+                  rel="noopener noreferrer">Visit Website</a>
+                <a class="btn-secondary" href="https://play.google.com/store/apps/details?id=com.baofengradios"
+                  target="_blank" rel="noopener noreferrer">Android</a>
+                <a class="btn-secondary" href="https://apps.apple.com/in/app/baofeng-radios/id6757856127"
+                  target="_blank" rel="noopener noreferrer">iOS</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Glozey -->
+          <div class="fp-panel" id="fp-glozey" role="tabpanel" aria-labelledby="tab-glozey" hidden>
+            <div class="fp-media">
+              <img src="projects/hVe0HiUvceQR_1280_800.png" alt="Glozey beauty at home app" />
+            </div>
+            <div class="fp-info">
+              <div class="fp-eyebrow">App + Web + Partner app</div>
+              <h3 class="fp-title"><span>Glozey</span>, beauty services at your doorstep</h3>
+              <p>
+                Salon-style services delivered at home: facials, waxing and hair styling. Includes a separate
+                <strong>partner app</strong> where beauticians register, manage bookings and track earnings.
+              </p>
+              <ul class="fp-points">
+                <li>Customer app + web</li>
+                <li>Partner onboarding app</li>
+                <li>Booking flow</li>
+                <li>Payment gateway</li>
+                <li>FCM push</li>
+                <li>React Native + Expo</li>
+              </ul>
+              <div class="fp-ctas">
+                <button class="btn-secondary" type="button" onclick="openAllProjects()">See all projects</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -1942,20 +2403,46 @@
       </div>
       <div class="exp-timeline">
 
-        <div class="exp-item reveal">
+        <div class="exp-item featured reveal">
           <div class="exp-dot"></div>
           <div class="exp-meta">
-            <div class="exp-period">Dec 2025 — Present</div>
+            <div class="exp-period">Oct 2026 — Present</div>
+            <div class="exp-company">Brythm Private Limited</div>
+            <div class="exp-role-line">
+              <span class="exp-role">App Developer</span>
+              <span class="exp-tag">Product company</span>
+            </div>
+          </div>
+          <ul class="exp-bullets">
+            <li>Working on <strong>Tiffexx</strong>, Brythm's home-cooked tiffin delivery product, live on
+              <a href="https://play.google.com/store/apps/details?id=com.tiffexx.user" target="_blank"
+                rel="noopener noreferrer">Google Play</a>
+            </li>
+            <li>Tiffexx runs as three apps: customers, tiffin partners (kitchens) and delivery partners</li>
+          </ul>
+        </div>
+
+        <div class="exp-item featured reveal">
+          <div class="exp-dot"></div>
+          <div class="exp-meta">
+            <div class="exp-period">Dec 2025 — Sep 2026</div>
             <div class="exp-company">G. S. Tele Communication Limited</div>
             <div class="exp-role-line">
               <span class="exp-role">App Developer</span>
               <span class="exp-loc">· Gurgaon</span>
+              <span class="exp-tag">Product company</span>
             </div>
           </div>
           <ul class="exp-bullets">
-            <li>Developing mobile apps to support spare parts &amp; accessories business operations</li>
-            <li>Building customer-facing and internal features using React Native and Expo</li>
-            <li>Collaborating with team to design, implement, and optimize app UI/UX</li>
+            <li>Built the <strong>Baofeng Radios</strong> app, live on
+              <a href="https://play.google.com/store/apps/details?id=com.baofengradios" target="_blank"
+                rel="noopener noreferrer">Play Store</a> and
+              <a href="https://apps.apple.com/in/app/baofeng-radios/id6757856127" target="_blank"
+                rel="noopener noreferrer">App Store</a>
+            </li>
+            <li>Razorpay payments, FCM push, deep linking, product listing and filters</li>
+            <li>Built customer-facing and internal features with React Native and Expo</li>
+            <li>Worked with the team on UI/UX and app performance</li>
           </ul>
         </div>
 
@@ -2035,333 +2522,16 @@
       </div>
       <div class="projects-grid">
 
+        <!-- 01 Baofeng Radios (featured, G. S. Tele) -->
         <div class="proj-card reveal">
           <div class="proj-banner has-img">
-            <img src="projects/7Oak5F7UNsMI_1280_800.png" alt="Theater Crave" />
-          </div>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">01</span>
-              <span class="proj-date">Aug 2023</span>
-            </div>
-            <div>
-              <div class="proj-name">Theater Crave</div>
-              <div class="proj-type">App + Web</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">Movie theater companion — order food from your seat with real-time tracking, seamless
-              payment integration, and a web-based admin panel for theater staff.</div>
-            <div class="proj-stack">
-              <span class="proj-tag">React Native</span>
-              <span class="proj-tag">Node.js</span>
-              <span class="proj-tag">MongoDB</span>
-              <span class="proj-tag">Payment GW</span>
-              <span class="proj-tag">FCM</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.theatercrave&hl=en"
-                target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card reveal reveal-delay-1">
-          <div class="proj-banner has-img">
-            <img src="projects/df9GYNEur8uY_1280_800.png" alt="Flatshare Karo" />
-          </div>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">02</span>
-              <span class="proj-date">May 2026</span>
-            </div>
-            <div>
-              <div class="proj-name">Flatshare Karo</div>
-              <div class="proj-type">App</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">Find your next flatmate or room nearby in just 2 minutes with city-wise discovery,
-              room details, and direct messaging features.</div>
-            <div class="proj-stack">
-              <span class="proj-tag">React Native</span>
-              <span class="proj-tag">Node.js</span>
-              <span class="proj-tag">MongoDB</span>
-              <span class="proj-tag">Express</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link" href="https://www.flatsharekaro.in/" target="_blank" rel="noopener noreferrer">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.flatsharekaro"
-                target="_blank" rel="noopener noreferrer">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card reveal reveal-delay-2">
-          <div class="proj-banner has-img">
-            <img src="projects/hVe0HiUvceQR_1280_800.png" alt="Glozey Beauty at Home" />
-          </div>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">03</span>
-              <span class="proj-date">Nov 2025</span>
-            </div>
-            <div>
-              <div class="proj-name">Glozey</div>
-              <div class="proj-type">App + Web</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">Salon-style beauty services delivered straight to your doorstep — facials, waxing,
-              hair styling, and professional partner onboarding.</div>
-            <div class="proj-stack">
-              <span class="proj-tag">React Native</span>
-              <span class="proj-tag">Expo</span>
-              <span class="proj-tag">Node.js</span>
-              <span class="proj-tag">MongoDB</span>
-              <span class="proj-tag">Express</span>
-              <span class="proj-tag">Payment GW</span>
-              <span class="proj-tag">FCM</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card reveal">
-          <div class="proj-banner has-img">
-            <img src="projects/wrK3euBF3YgZ_1280_800.png" alt="Hisaab Pro" />
-          </div>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">04</span>
-              <span class="proj-date">June 2026</span>
-            </div>
-            <div>
-              <div class="proj-name">Hisaab Pro</div>
-              <div class="proj-type">Mobile App</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">All-in-one expense manager for Indian users — track personal spending, split bills
-              with friends and groups, and manage freelance projects, clients, and developer payments in one place.
-            </div>
-            <div class="proj-stack">
-              <span class="proj-tag">React Native</span>
-              <span class="proj-tag">Expo</span>
-              <span class="proj-tag">Node.js</span>
-              <span class="proj-tag">MongoDB</span>
-              <span class="proj-tag">JWT + OTP</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link " href="https://hisaab-pro.netlify.app/" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="proj-card reveal reveal-delay-1">
-          <div class="proj-banner has-img">
-            <img src="projects/xbN2BHIqQv4b_1280_800.png" alt="Edumug Admin" />
-          </div>
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">05</span>
-              <span class="proj-date">April 2026</span>
-            </div>
-            <div>
-              <div class="proj-name">Edumug Admin</div>
-              <div class="proj-type">Mobile App</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">School management app for teachers and admins — attendance, exam marks,
-              homework, and student records, all connected to the EduMug platform.</div>
-            <div class="proj-stack">
-              <span class="proj-tag">React Native</span>
-              <span class="proj-tag">Expo</span>
-              <span class="proj-tag">FCM</span>
-              <span class="proj-tag">TypeScript</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link" href="https://edumug.in/" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link" href="https://play.google.com/store/apps/details?id=admin.edumug.com&hl=en_IN"
-                target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link" href="https://apps.apple.com/in/app/edumug-admin/id6767473999" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="proj-card reveal reveal-delay-2">
-          <div class="proj-banner has-img">
-            <img src="projects/0Ve0HiKTseQR_1280_800.png" alt="NoteBook" />
-          </div>
-
-          <div class="proj-body">
-            <div class="proj-header">
-              <span class="proj-num">06</span>
-              <span class="proj-date">Jan 2022</span>
-            </div>
-            <div>
-              <div class="proj-name">NoteBook</div>
-              <div class="proj-type">Web</div>
-            </div>
-            <div class="proj-divider"></div>
-            <div class="proj-desc">Securely store your notes and passwords with end-to-end encryption. Your sensitive
-              data stays completely private and accessible only to you.</div>
-            <div class="proj-stack">
-              <span class="proj-tag">ReactJs</span>
-              <span class="proj-tag">Context API</span>
-              <span class="proj-tag">Node.js</span>
-              <span class="proj-tag">Express.js</span>
-              <span class="proj-tag">MongoDB</span>
-              <span class="proj-tag">JWT</span>
-              <span class="proj-tag">Crypto</span>
-            </div>
-            <div class="proj-links">
-              <a class="proj-link" href="https://notebook-book.onrender.com/" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <line x1="2" y1="12" x2="22" y2="12" />
-                  <path
-                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
-                Website
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
-                </svg>
-                Android
-              </a>
-              <a class="proj-link disabled" href="#" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-                </svg>
-                iOS
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="proj-card reveal">
-          <div class="proj-banner has-img">
+            <span class="proj-ribbon">★ G. S. Tele · Product</span>
             <img src="projects/ONhtRODn9rlN_1280_800.png" alt="Baofeng Radios" />
           </div>
 
           <div class="proj-body">
             <div class="proj-header">
-              <span class="proj-num">07</span>
+              <span class="proj-num">01</span>
               <span class="proj-date">Jul 2026</span>
             </div>
 
@@ -2417,6 +2587,335 @@
             </div>
           </div>
         </div>
+
+        <!-- 02 Glozey (featured) -->
+        <div class="proj-card reveal">
+          <div class="proj-banner has-img">
+            <span class="proj-ribbon">★ Featured product</span>
+            <img src="projects/hVe0HiUvceQR_1280_800.png" alt="Glozey Beauty at Home" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">02</span>
+              <span class="proj-date">Nov 2025</span>
+            </div>
+            <div>
+              <div class="proj-name">Glozey</div>
+              <div class="proj-type">App + Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Salon-style beauty services delivered straight to your doorstep — facials, waxing,
+              hair styling, and professional partner onboarding.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Express</span>
+              <span class="proj-tag">Payment GW</span>
+              <span class="proj-tag">FCM</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Theater Crave -->
+        <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-banner has-img">
+            <img src="projects/7Oak5F7UNsMI_1280_800.png" alt="Theater Crave" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">03</span>
+              <span class="proj-date">Aug 2023</span>
+            </div>
+            <div>
+              <div class="proj-name">Theater Crave</div>
+              <div class="proj-type">App + Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Movie theater companion — order food from your seat with real-time tracking, seamless
+              payment integration, and a web-based admin panel for theater staff.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Payment GW</span>
+              <span class="proj-tag">FCM</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.theatercrave&hl=en"
+                target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 Flatshare Karo -->
+        <div class="proj-card reveal reveal-delay-2">
+          <div class="proj-banner has-img">
+            <img src="projects/df9GYNEur8uY_1280_800.png" alt="Flatshare Karo" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">04</span>
+              <span class="proj-date">May 2026</span>
+            </div>
+            <div>
+              <div class="proj-name">Flatshare Karo</div>
+              <div class="proj-type">App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Find your next flatmate or room nearby in just 2 minutes with city-wise discovery,
+              room details, and direct messaging features.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">Express</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://www.flatsharekaro.in/" target="_blank" rel="noopener noreferrer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=com.flatsharekaro"
+                target="_blank" rel="noopener noreferrer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Hisaab Pro -->
+        <div class="proj-card reveal reveal-delay-1">
+          <div class="proj-banner has-img">
+            <img src="projects/wrK3euBF3YgZ_1280_800.png" alt="Hisaab Pro" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">05</span>
+              <span class="proj-date">June 2026</span>
+            </div>
+            <div>
+              <div class="proj-name">Hisaab Pro</div>
+              <div class="proj-type">Mobile App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">All-in-one expense manager for Indian users — track personal spending, split bills
+              with friends and groups, and manage freelance projects, clients, and developer payments in one place.
+            </div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">JWT + OTP</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link " href="https://hisaab-pro.netlify.app/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 Edumug Admin -->
+        <div class="proj-card reveal reveal-delay-2">
+          <div class="proj-banner has-img">
+            <img src="projects/xbN2BHIqQv4b_1280_800.png" alt="Edumug Admin" />
+          </div>
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">06</span>
+              <span class="proj-date">April 2026</span>
+            </div>
+            <div>
+              <div class="proj-name">Edumug Admin</div>
+              <div class="proj-type">Mobile App</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">School management app for teachers and admins — attendance, exam marks,
+              homework, and student records, all connected to the EduMug platform.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">React Native</span>
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">FCM</span>
+              <span class="proj-tag">TypeScript</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://edumug.in/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link" href="https://play.google.com/store/apps/details?id=admin.edumug.com&hl=en_IN"
+                target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link" href="https://apps.apple.com/in/app/edumug-admin/id6767473999" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 07 NoteBook -->
+        <div class="proj-card reveal">
+          <div class="proj-banner has-img">
+            <img src="projects/0Ve0HiKTseQR_1280_800.png" alt="NoteBook" />
+          </div>
+
+          <div class="proj-body">
+            <div class="proj-header">
+              <span class="proj-num">07</span>
+              <span class="proj-date">Jan 2022</span>
+            </div>
+            <div>
+              <div class="proj-name">NoteBook</div>
+              <div class="proj-type">Web</div>
+            </div>
+            <div class="proj-divider"></div>
+            <div class="proj-desc">Securely store your notes and passwords with end-to-end encryption. Your sensitive
+              data stays completely private and accessible only to you.</div>
+            <div class="proj-stack">
+              <span class="proj-tag">ReactJs</span>
+              <span class="proj-tag">Context API</span>
+              <span class="proj-tag">Node.js</span>
+              <span class="proj-tag">Express.js</span>
+              <span class="proj-tag">MongoDB</span>
+              <span class="proj-tag">JWT</span>
+              <span class="proj-tag">Crypto</span>
+            </div>
+            <div class="proj-links">
+              <a class="proj-link" href="https://notebook-book.onrender.com/" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path
+                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Website
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.523 15.341V9.949H6.478v5.392a5.055 5.055 0 0 0 5.022 4.989 5.055 5.055 0 0 0 5.023-4.989zM14.914 3.07l1.437-2.488a.302.302 0 0 0-.524-.303L14.38 2.77a6.552 6.552 0 0 0-4.76 0L8.172.279a.302.302 0 0 0-.524.303L9.086 3.07A6.253 6.253 0 0 0 5.4 8.645h13.2A6.253 6.253 0 0 0 14.914 3.07zM9.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z" />
+                </svg>
+                Android
+              </a>
+              <a class="proj-link disabled" href="#" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                iOS
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 Find Your Masjid -->
         <div class="proj-card reveal reveal-delay-1">
           <div class="proj-banner has-img">
             <img src="projects/0Rj707Qttnlw_1280_800.png" alt="Find Your Masjid" />
@@ -2466,6 +2965,8 @@
             </div>
           </div>
         </div>
+
+        <!-- 09 FlipChat -->
         <div class="proj-card reveal reveal-delay-2">
           <div class="proj-banner has-img">
             <img src="projects/1NhERiDn9rlP_1280_800.png" alt="FlipChat" />
@@ -2639,10 +3140,35 @@
       requestAnimationFrame(animateCursor);
     }
     animateCursor();
-    document.querySelectorAll('a, button, .proj-card, .skill-card, .contact-link, .highlight-item').forEach(el => {
+    document.querySelectorAll('a, button, .proj-card, .skill-card, .contact-link, .highlight-item, .fp-tile, .fp-panel').forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
+
+    // Featured products tabs
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.fp-tile[data-target]'));
+      function select(tab) {
+        tabs.forEach(t => {
+          const on = t === tab;
+          t.setAttribute('aria-selected', on);
+          t.tabIndex = on ? 0 : -1;
+          const panel = document.getElementById(t.dataset.target);
+          panel.hidden = !on;
+          panel.classList.toggle('fp-in', on);
+        });
+      }
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => select(t));
+        t.addEventListener('keydown', e => {
+          const k = e.key;
+          if (!['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft'].includes(k)) return;
+          e.preventDefault();
+          const next = tabs[(i + (k === 'ArrowDown' || k === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+          next.focus(); select(next);
+        });
+      });
+    })();
 
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
@@ -2708,6 +3234,38 @@
     const projectsData = [
       {
         num: '01',
+        date: 'Jul 2026',
+        name: 'Baofeng Radios',
+        type: 'E-Commerce App',
+        featured: 'G. S. Tele · Product',
+        categories: ['app'],
+        banner: "projects/ONhtRODn9rlN_1280_800.png",
+        desc: 'A modern e-commerce platform for BAOFENG communication devices, allowing customers to explore products, manage orders, and securely purchase professional radios and accessories with a seamless shopping experience.',
+        stack: ['React Native', 'Expo', 'Redux', 'FCM', 'Razorpay'],
+        links: {
+          website: 'https://baofengradios.com/',
+          android: 'https://play.google.com/store/apps/details?id=com.baofengradios',
+          ios: 'https://apps.apple.com/in/app/baofeng-radios/id6757856127'
+        }
+      },
+      {
+        num: '05',
+        date: 'Nov 2025',
+        name: 'Glozey',
+        type: 'App + Web',
+        featured: 'Featured product',
+        categories: ['app', 'web'],
+        banner: "projects/hVe0HiUvceQR_1280_800.png",
+        desc: 'Salon-style beauty services delivered straight to your doorstep — facials, waxing, hair styling, and professional partner onboarding.',
+        stack: ['React Native', 'Expo', 'Node.js', 'MongoDB', 'Express', 'Payment GW', 'FCM'],
+        links: {
+          website: '',
+          android: '',
+          ios: ''
+        }
+      },
+      {
+        num: '02',
         date: 'Aug 2026',
         name: 'Hisaab',
         type: 'Mobile App',
@@ -2722,7 +3280,7 @@
         }
       },
       {
-        num: '01',
+        num: '03',
         date: 'Aug 2023',
         name: 'Theater Crave',
         type: 'App + Web',
@@ -2737,7 +3295,7 @@
         }
       },
       {
-        num: '02',
+        num: '04',
         date: 'May 2026',
         name: 'Flatshare Karo',
         type: 'App',
@@ -2752,22 +3310,7 @@
         }
       },
       {
-        num: '03',
-        date: 'Nov 2025',
-        name: 'Glozey',
-        type: 'App + Web',
-        categories: ['app', 'web'],
-        banner: "projects/hVe0HiUvceQR_1280_800.png",
-        desc: 'Salon-style beauty services delivered straight to your doorstep — facials, waxing, hair styling, and professional partner onboarding.',
-        stack: ['React Native', 'Expo', 'Node.js', 'MongoDB', 'Express', 'Payment GW', 'FCM'],
-        links: {
-          website: '',
-          android: '',
-          ios: ''
-        }
-      },
-      {
-        num: '04', // Or update sequence numbers as needed
+        num: '06',
         date: 'Nov 2025',
         name: 'Glozey Partner',
         type: 'Mobile App',
@@ -2782,22 +3325,7 @@
         }
       },
       {
-        num: '05',
-        date: 'Jul 2026',
-        name: 'Baofeng Radios',
-        type: 'E-Commerce App',
-        categories: ['app'],
-        banner: "projects/ONhtRODn9rlN_1280_800.png",
-        desc: 'A modern e-commerce platform for BAOFENG communication devices, allowing customers to explore products, manage orders, and securely purchase professional radios and accessories with a seamless shopping experience.',
-        stack: ['React Native', 'Expo', 'Redux', 'FCM', 'Razorpay'],
-        links: {
-          website: 'https://baofengradios.com/',
-          android: 'https://play.google.com/store/apps/details?id=com.baofengradios',
-          ios: 'https://apps.apple.com/in/app/baofeng-radios/id6757856127'
-        }
-      },
-      {
-        num: '06',
+        num: '07',
         date: 'May 2024',
         name: 'Edumug ERP',
         type: 'Mobile App',
@@ -2812,7 +3340,7 @@
         }
       },
       {
-        num: '07',
+        num: '08',
         date: 'April 2026',
         name: 'Edumug Admin',
         type: 'Mobile App',
@@ -2827,7 +3355,7 @@
         }
       },
       {
-        num: '08',
+        num: '09',
         date: 'Aug 2026',
         name: 'Indian Mosque Detail',
         type: 'App',
@@ -2842,7 +3370,7 @@
         }
       },
       {
-        num: '09',
+        num: '10',
         date: 'Jan 2022',
         name: 'NoteBook',
         type: 'Web',
@@ -2858,7 +3386,7 @@
       },
 
       {
-        num: '10',
+        num: '11',
         date: 'Jun 2024',
         name: 'FlipChat',
         type: 'Mobile App',
@@ -2873,7 +3401,7 @@
         }
       },
       {
-        num: '11',
+        num: '12',
         date: 'Feb 2024',
         name: 'LeadSync',
         type: 'App + Web',
@@ -2888,7 +3416,7 @@
         }
       },
       {
-        num: '12',
+        num: '13',
         date: 'Mar 2025',
         name: 'Prime 25 OTT',
         type: 'Mobile App',
@@ -2903,7 +3431,7 @@
         }
       },
       {
-        num: '13',
+        num: '14',
         date: 'May 2025',
         name: 'HUNER',
         type: 'App',
@@ -2918,7 +3446,7 @@
         }
       },
       {
-        num: '14',
+        num: '15',
         date: 'Jan 2022',
         name: 'TODO',
         type: 'App',
@@ -2933,7 +3461,7 @@
         }
       },
       {
-        num: '15',
+        num: '16',
         date: 'Sep 2023',
         name: 'RedElectro',
         type: 'App',
@@ -2949,7 +3477,7 @@
       },
 
       {
-        num: '16',
+        num: '17',
         date: 'Aug 2025',
         name: 'Car Parking Sticker',
         type: 'App',
@@ -2965,7 +3493,7 @@
       },
 
       {
-        num: '17',
+        num: '18',
         date: 'Oct 2023',
         name: 'Digital Chunav Prachar',
         type: 'App',
@@ -2989,7 +3517,7 @@
     const imgPlaceholderSvg = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
 
     function renderApGrid() {
-      apGrid.innerHTML = projectsData.map((p,index) => {
+      apGrid.innerHTML = projectsData.map((p, index) => {
         const badges = p.categories.map(c => `<span class="proj-cat-badge">${catLabels[c]}</span>`).join('');
         const icons = { website: globeSvg, android: androidSvg, ios: iosSvg };
         const labels = { website: 'Website', android: 'Android', ios: 'iOS' };
@@ -3003,13 +3531,15 @@
 
         const stackTags = p.stack.map(s => `<span class="proj-tag">${s}</span>`).join('');
 
-        // Banner HTML condition (Fixed syntax error)
+        const ribbon = p.featured ? `<span class="proj-ribbon">★ ${p.featured}</span>` : '';
+
         const bannerHtml = !p?.banner
           ? `<div class="proj-banner">
           <div class="proj-cat-badges">${badges}</div>
           <div class="proj-banner-placeholder">${imgPlaceholderSvg}<span>Project preview</span></div>
         </div>`
           : `<div class="proj-banner has-img">
+          ${ribbon}
           <img src="${p.banner}" alt="${p.name}" />
         </div>`;
 
