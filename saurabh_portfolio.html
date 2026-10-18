@@ -69,46 +69,168 @@
     }
 
     /* ─── CURSOR ─────────────────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      cursor: none !important;
+    @media (hover: hover) and (pointer: fine) {
+
+      *,
+      *::before,
+      *::after {
+        cursor: none !important;
+      }
+    }
+
+    @media (hover: none), (pointer: coarse) {
+
+      #cursor,
+      #cursor-ring,
+      .c-trail {
+        display: none !important;
+      }
+    }
+
+    #cursor,
+    #cursor-ring,
+    .c-trail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      will-change: transform;
+      opacity: 0;
+      transition: opacity 0.25s;
     }
 
     #cursor {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
       z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.25s, height 0.25s, opacity 0.25s;
     }
 
     #cursor-ring {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid rgba(124, 111, 255, 0.5);
-      border-radius: 50%;
-      pointer-events: none;
       z-index: 9998;
+    }
+
+    .c-trail {
+      z-index: 9997;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    body.cursor-on #cursor,
+    body.cursor-on #cursor-ring {
+      opacity: 1;
+    }
+
+    body.cursor-on .c-trail {
+      opacity: var(--o, 0.3);
+    }
+
+    .c-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      margin: -5px 0 0 -5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px 2px rgba(124, 111, 255, 0.65);
+      transition: transform 0.2s ease, background 0.2s;
+    }
+
+    .c-ring,
+    .c-fill {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      margin: -20px 0 0 -20px;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s, background 0.3s;
+    }
+
+    .c-ring {
+      background: conic-gradient(from 0deg, var(--accent), var(--accent3), var(--accent2), var(--accent));
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+      mask: radial-gradient(farthest-side, transparent calc(100% - 1.5px), #000 calc(100% - 1.5px));
+      animation: spin 6s linear infinite;
+      opacity: 0.85;
+    }
+
+    .c-fill {
+      background: rgba(124, 111, 255, 0.14);
+      transform: scale(0);
+    }
+
+    .c-label {
+      position: absolute;
       transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.25s, height 0.25s, opacity 0.25s;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
     }
 
-    body.cursor-hover #cursor {
-      width: 20px;
-      height: 20px;
-      opacity: 0.6;
+    body.cursor-hover .c-ring {
+      transform: scale(1.5);
     }
 
-    body.cursor-hover #cursor-ring {
-      width: 52px;
-      height: 52px;
-      opacity: 0.3;
+    body.cursor-hover .c-fill {
+      transform: scale(1.5);
+    }
+
+    body.cursor-hover .c-dot {
+      transform: scale(0.5);
+    }
+
+    body.cursor-label .c-ring {
+      transform: scale(2.1);
+      opacity: 0;
+    }
+
+    body.cursor-label .c-fill {
+      transform: scale(2.1);
+      background: var(--accent);
+    }
+
+    body.cursor-label .c-label {
+      opacity: 1;
+    }
+
+    body.cursor-label .c-dot {
+      transform: scale(0);
+    }
+
+    body.cursor-down .c-ring {
+      transform: scale(0.8);
+    }
+
+    body.cursor-down .c-dot {
+      transform: scale(1.6);
+    }
+
+    .c-ripple {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent3);
+      pointer-events: none;
+      z-index: 9996;
+      animation: ripple 0.55s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(5);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .c-ring,
+      .c-ripple {
+        animation: none;
+      }
     }
 
     /* ─── NAV ─────────────────────────────────────────── */
@@ -1972,8 +2094,8 @@
 <body>
 
   <!-- Custom cursor -->
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <div id="cursor"><span class="c-dot"></span></div>
+  <div id="cursor-ring"><span class="c-ring"></span><span class="c-fill"></span><span class="c-label"></span></div>
 
   <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Navigation menu">
@@ -2114,19 +2236,19 @@
           </div>
 
           <button class="fp-tile fp-grad" role="tab" id="tab-tiffexx" aria-selected="true" aria-controls="fp-tiffexx"
-            data-target="fp-tiffexx" type="button">
+            data-target="fp-tiffexx" data-cursor="View" type="button">
             <img src="projects/tiffexx_1280_800.png" alt="" onerror="this.style.display='none'" />
             <span class="fp-tile-label">Tiffexx<small>Current · Brythm</small></span>
           </button>
 
           <button class="fp-tile" role="tab" id="tab-baofeng" aria-selected="false" aria-controls="fp-baofeng"
-            data-target="fp-baofeng" type="button" tabindex="-1">
+            data-target="fp-baofeng" data-cursor="View" type="button" tabindex="-1">
             <img src="projects/ONhtRODn9rlN_1280_800.png" alt="" />
             <span class="fp-tile-label">Baofeng Radios<small>E-commerce app</small></span>
           </button>
 
           <button class="fp-tile" role="tab" id="tab-glozey" aria-selected="false" aria-controls="fp-glozey"
-            data-target="fp-glozey" type="button" tabindex="-1">
+            data-target="fp-glozey" data-cursor="View" type="button" tabindex="-1">
             <img src="projects/hVe0HiUvceQR_1280_800.png" alt="" />
             <span class="fp-tile-label">Glozey<small>Beauty at home</small></span>
           </button>
@@ -3129,21 +3251,82 @@
 
   <script>
     // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    function animateCursor() {
-      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    document.querySelectorAll('a, button, .proj-card, .skill-card, .contact-link, .highlight-item, .fp-tile, .fp-panel').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-    });
+    (function () {
+      if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const body = document.body;
+      const dot = document.getElementById('cursor');
+      const ring = document.getElementById('cursor-ring');
+      const label = ring.querySelector('.c-label');
+      const INTERACTIVE = 'a, button, .skill-card, .contact-link, .highlight-item, .proj-card, .fp-panel';
+
+      let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+
+      // comet trail
+      const trail = [];
+      const N = reduce ? 0 : 8;
+      for (let i = 0; i < N; i++) {
+        const el = document.createElement('div');
+        const size = 8 - i * 0.7;
+        el.className = 'c-trail';
+        el.style.width = el.style.height = size + 'px';
+        el.style.margin = (-size / 2) + 'px 0 0 ' + (-size / 2) + 'px';
+        el.style.setProperty('--o', (0.5 - i * 0.055).toFixed(2));
+        body.appendChild(el);
+        trail.push({ el, x: mx, y: my });
+      }
+
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        body.classList.add('cursor-on');
+      });
+      document.documentElement.addEventListener('mouseleave', () => body.classList.remove('cursor-on'));
+      document.documentElement.addEventListener('mouseenter', () => body.classList.add('cursor-on'));
+
+      // hover states (delegated, also covers cards rendered later)
+      document.addEventListener('mouseover', e => {
+        const t = e.target;
+        if (!(t instanceof Element)) return;
+        const lab = t.closest('[data-cursor]');
+        if (lab) {
+          label.textContent = lab.dataset.cursor;
+          body.classList.add('cursor-label');
+        } else {
+          body.classList.remove('cursor-label');
+        }
+        body.classList.toggle('cursor-hover', !!t.closest(INTERACTIVE));
+      });
+
+      document.addEventListener('mousedown', () => body.classList.add('cursor-down'));
+      document.addEventListener('mouseup', () => body.classList.remove('cursor-down'));
+
+      // click ripple
+      document.addEventListener('click', e => {
+        if (reduce) return;
+        const r = document.createElement('span');
+        r.className = 'c-ripple';
+        r.style.left = e.clientX + 'px';
+        r.style.top = e.clientY + 'px';
+        body.appendChild(r);
+        r.addEventListener('animationend', () => r.remove());
+      });
+
+      function loop() {
+        rx += (mx - rx) * 0.15;
+        ry += (my - ry) * 0.15;
+        dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+        ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
+        let px = mx, py = my;
+        for (const t of trail) {
+          t.x += (px - t.x) * 0.4;
+          t.y += (py - t.y) * 0.4;
+          t.el.style.transform = `translate3d(${t.x}px, ${t.y}px, 0)`;
+          px = t.x; py = t.y;
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
 
     // Featured products tabs
     (function () {
@@ -3563,10 +3746,6 @@
       </div>`;
       }).join('');
 
-      apGrid.querySelectorAll('.proj-card, .proj-link').forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-      });
     }
 
     renderApGrid();
