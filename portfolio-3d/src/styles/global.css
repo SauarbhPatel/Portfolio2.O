@@ -2762,3 +2762,147 @@ html.reduced .tl2-card {
     font-size: clamp(1.9rem, min(10vw, 6.6svh), 3.4rem);
   }
 }
+
+/* ── v4: toolbox (replaces the crossed tape bands) ────────────────────── */
+.toolbox {
+  padding: clamp(80px, 11vw, 140px) 0 clamp(20px, 3vw, 40px);
+  position: relative;
+  overflow: hidden;
+}
+.toolbox::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 70vw;
+  height: 40vw;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255, 90, 31, 0.1), transparent);
+  pointer-events: none;
+}
+.toolbox-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  margin-bottom: clamp(36px, 5vw, 60px);
+  position: relative;
+}
+.toolbox-title {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5.6vw, 4.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.toolbox-meta {
+  max-width: 34ch;
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
+  padding-bottom: 6px;
+}
+.toolbox-meta .mono {
+  color: var(--ember);
+}
+.tool-rows {
+  display: grid;
+  gap: 14px;
+  position: relative;
+}
+.tool-row {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  padding: 6px 0;
+}
+.tool-track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  will-change: transform;
+}
+.tool {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  height: 76px;
+  padding: 0 28px 0 22px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  transition: transform 0.45s var(--ease), border-color 0.45s, background 0.45s;
+}
+.tool::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 140% at 0% 50%, color-mix(in srgb, var(--brand) 22%, transparent), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.45s;
+}
+.tool svg {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  fill: #8c857a;
+  transition: fill 0.45s, transform 0.6s var(--ease);
+}
+.tool-name {
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: rgba(243, 238, 230, 0.78);
+  transition: color 0.45s;
+}
+.tool:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--brand) 55%, transparent);
+}
+.tool:hover::before {
+  opacity: 1;
+}
+.tool:hover svg {
+  fill: var(--brand);
+  transform: rotate(-8deg) scale(1.12);
+}
+.tool:hover .tool-name {
+  color: var(--paper);
+}
+html.reduced .tool-track {
+  flex-wrap: wrap;
+  width: auto;
+  padding: 0 var(--gutter);
+}
+html.reduced .tool-row {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+@media (max-width: 900px) {
+  .toolbox-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tool {
+    height: 60px;
+    padding: 0 20px 0 16px;
+    border-radius: 16px;
+    gap: 10px;
+  }
+  .tool svg {
+    width: 22px;
+    height: 22px;
+  }
+  .tool-name {
+    font-size: 1.02rem;
+  }
+  .tool-rows,
+  .tool-track {
+    gap: 10px;
+  }
+}

@@ -82,11 +82,12 @@ export const services = [
   },
 ]
 
-export const stack = [
-  'React Native', 'Expo', 'JavaScript ES6+', 'React.js', 'Next.js', 'Node.js', 'Express.js', 'MongoDB',
-  'Redis', 'Socket.io', 'WebRTC', 'WebSockets', 'FCM', 'Redux', 'Context API', 'AWS S3', 'AWS EC2',
-  'Cloudinary', 'Tailwind CSS', 'Git',
-]
+// Toolbox section: two moving rows of tools. Names must match an icon in src/components/Marquee.jsx
+// (anything unknown gets a neutral glyph).
+export const stack = {
+  front: ['React Native', 'Expo', 'JavaScript', 'TypeScript', 'React.js', 'Next.js', 'Redux', 'Context API', 'Tailwind CSS', 'Firebase'],
+  back: ['Node.js', 'Express.js', 'MongoDB', 'Redis', 'Socket.io', 'WebRTC', 'WebSockets', 'FCM', 'AWS S3', 'AWS EC2', 'Cloudinary', 'Git'],
+}
 
 // Selected work — large case-study cards. `result` is only filled where it is a real, verifiable fact.
 export const projects = [
